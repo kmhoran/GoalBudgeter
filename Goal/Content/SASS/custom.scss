@@ -1,0 +1,36 @@
+﻿$black: #333;
+$danger: #D9534F;
+$danger-light: #FC827F;
+
+body {
+    .body-content{
+        margin-top:2em;
+    }
+}
+
+/*splash*/
+.index-form .input-group{
+    margin-bottom:1em;
+}
+#transaction-btn-group{
+    margin: auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+    #select-debit-btn, #select-log-btn{
+        margin-left: 10em;
+    }
+}
+
+.danger-wells{
+    .well{
+        background-color: $danger-light;
+        border-color: $danger;
+    }
+    a{
+        text-decoration: none;
+        color: $black;
+        cursor: pointer;
+    }
+}
+/*End splash*/

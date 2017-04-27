@@ -1,0 +1,25 @@
+body .body-content {
+  margin-top: 2em; }
+
+/*splash*/
+.index-form .input-group {
+  margin-bottom: 1em; }
+
+#transaction-btn-group {
+  margin: auto;
+  margin-top: 2em;
+  margin-bottom: 2em; }
+  #transaction-btn-group #select-debit-btn, #transaction-btn-group #select-log-btn {
+    margin-left: 10em; }
+
+.danger-wells .well {
+  background-color: #FC827F;
+  border-color: #D9534F; }
+.danger-wells a {
+  text-decoration: none;
+  color: #333;
+  cursor: pointer; }
+
+/*End splash*/
+
+/*# sourceMappingURL=custom.css.map */

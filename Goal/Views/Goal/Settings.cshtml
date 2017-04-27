@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = "~/Views/Shared/blank.cshtml";
+}
+
+<h2>Settings</h2>
+
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#month">Month</a></li>
+    <li><a data-toggle="tab" href="#year">Year</a></li>
+    <li><a data-toggle="tab" href="#general">General</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="month" class="tab-pane fade in active">
+        <h3>Monthly Settings</h3>
+        <ul>
+            <li>Predictive Settings</li>
+            <li>Monthly Goal</li>
+        </ul>
+    </div>
+    <div id="year" class="tab-pane fade">
+        <h3>Yearly Settings</h3>
+        <ul>
+            <li>StartingAmount</li>
+            <li>Yearly Goal</li>
+        </ul>
+    </div>
+    <div id="general" class="tab-pane fade">
+        <h3>General Settings</h3>
+        <ul>
+            <li>Categories</li>
+        </ul>
+    </div>
+</div>
