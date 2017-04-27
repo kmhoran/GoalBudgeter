@@ -1,7 +1,7 @@
 ## Targeted ignore files
 
 # ignore webconfig
-Goal\Web.config
+Goal/Web.config
 
 # .........................
 
