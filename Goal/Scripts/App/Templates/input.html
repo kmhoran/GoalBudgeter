@@ -37,7 +37,9 @@
             </div>
             <p ng-show="inputForm.date.$invalid" class="well well-sm">Enter a valid date.</p>
 
-            <button type="submit" class="btn btn-primary btn-lg" ng-disabled="inputForm.$invalid">Add to record</button>
+            <button type="submit" class="btn btn-success btn-lg" ng-disabled="inputForm.$invalid">Add to record</button>
+            <button type="button" class="btn btn-default btn-lg" ng-click="InC.refreshForm()">Clear</button>
+            <button type="button" class="btn btn-primary btn-lg">View Log</button>
         </form>
     </div>
 </div>

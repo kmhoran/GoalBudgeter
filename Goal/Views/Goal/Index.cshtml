@@ -1,67 +1,41 @@
-﻿@{ 
+﻿@{
     Layout = "~/Views/Shared/blank.cshtml";
 
 }
 
-<!-- goal.index -->
-<div class="row">
-    <div class="col-md-12 col-sm-12">
-        <ul class="list-inline">
-            <li>!Transportation</li>
-            <li>! Fun</li>
-        </ul>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12 col-sm-12">
-        <form class="form-inline index-form">
-            <div class="input-group">
-                <div class="input-group-addon"><span class="fa fa-money"></span></div>
-                <input type="text" class="form-control form-control-lg" placeholder="Amount" />
-            </div>
-            <div class="input-group">
-                <div class="input-group-addon"><span class="fa fa-info-circle"></span></div>
-                <input type="text" class="form-control form-control-lg" placeholder="Description" />
-            </div>
-            <div class="input-group">
-                <div class="input-group-addon"><span class="fa fa-list"></span></div>
-                <select class="form-control">
-                    <option>Thing 1</option>
-                    <option>Thing 2</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <div class="input-group-addon"><span class="fa fa-calendar"></span></div>
-                <input type="date" value="04-24-2017" class="form-control" />
-            </div>
-            <button type="submit" class="btn btn-primary btn-lg">Add to record</button> 
-        </form>
-    </div> 
-</div>
-<!-- !Input form -->
-<div class="row">
-    <div class="Col-md-6 col-sm-6"><h1>$MonthlyAllowance</h1></div>
-    <div class="Col-md-6 col-sm-6"><h1>$AnotherValue</h1></div>
-</div>
+@section Meta{
+    <!-- Toastr -->
+    <link href="~/Content/Toastr/toastr.css" rel="stylesheet" />
+}
 
-<div class="row">
-    <div class="col-md-6 col-sm-6 month-chart">
-        <h2> This is a Month Chart</h2>
-    </div>
-    <div class="col-md-6 col-sm-6 year-chart">
-        <h2>This is a Year Chart</h2>
-    </div>
-    <div class="col-md-6 col-sm-6 month-chart">
-        <h2> This is a Month Chart</h2>
-    </div>
-    <div class="col-md-6 col-sm-6 year-chart">
-        <h2>This is a Year Chart</h2>
-    </div>
-    <div class="col-md-6 col-sm-6 month-chart">
-        <h2> This is a Month Chart</h2>
-    </div>
-    <div class="col-md-6 col-sm-6 year-chart">
-        <h2>This is a Year Chart</h2>
-    </div>
-</div>
+<div ng-view></div>
 
+@section Scripts{
+    <!-- Toastr -->
+    <script src="~/Scripts/toastr.min.js"></script>
+    <!-- Angular 1 -->
+    <script src="~/Scripts/bower_components/angular/angular.min.js"></script>
+    <script src="~/Scripts/bower_components/angular-route/angular-route.min.js"></script>
+    <script>
+        var APPNAME = "GoalApp";
+
+        (function () {
+            "use strict"
+            angular.module(APPNAME, ['ngRoute']);
+        })();
+    </script>
+    <!-- Routing -->
+    <script src="~/Scripts/App/Config/pageRouting.js"></script>
+    <!-- Services -->
+    <script src="~/Scripts/App/Services/LogHttpService.js"></script>
+    <!-- ngRoute View Controllers -->
+    <script src="~/Scripts/App/Controllers/globalController.js"></script>
+    <script src="~/Scripts/App/Controllers/splashPageController.js"></script>
+    <script src="~/Scripts/App/Controllers/settingsPageController.js"></script>
+    <script src="~/Scripts/App/Controllers/inputCreditController.js"></script>
+    <script src="~/Scripts/App/Controllers/inputDebitController.js"></script>
+    <script src="~/Scripts/App/Controllers/logPageController.js"></script>
+    <script src="~/Scripts/App/Controllers/monthPageController.js"></script>
+    <script src="~/Scripts/App/Controllers/yearPageController.js"></script>
+    <script src="~/Scripts/App/Controllers/wishlistPageController.js"></script>
+}

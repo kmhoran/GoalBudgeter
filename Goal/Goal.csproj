@@ -208,12 +208,15 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <EmbeddedResource Include="Content\Images\pexels-photo-89505-ferris-wheel.jpeg" />
     <Content Include="Content\SASS\custom.css" />
     <Content Include="Content\Theme\sb-admin-2.css" />
     <Content Include="Content\Theme\sb-admin-2.min.css" />
     <Content Include="Content\Theme\Vendor\font-awesome.min.css" />
     <Content Include="Content\Theme\Vendor\metisMenu.css" />
     <Content Include="Content\Theme\Vendor\metisMenu.min.css" />
+    <Content Include="Content\Toastr\toastr.css" />
+    <Content Include="Content\Toastr\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -261,6 +264,8 @@
     <Content Include="Scripts\bower_components\angular-route\LICENSE.md" />
     <Content Include="Scripts\bower_components\angular-route\package.json" />
     <Content Include="Scripts\bower_components\angular-route\README.md" />
+    <Content Include="Content\Toastr\toastr.scss" />
+    <Content Include="Content\Toastr\toastr.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bower_components\angular\angular-csp.css" />
     <Content Include="Scripts\bower_components\angular\angular.js" />
@@ -280,6 +285,8 @@
     <Content Include="Scripts\Theme\sb-admin-2.min.js" />
     <Content Include="Scripts\Theme\vendor\metisMenu.js" />
     <Content Include="Scripts\Theme\vendor\metisMenu.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -294,7 +301,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\_Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -319,6 +326,8 @@
     <Content Include="Views\Shared\blank.cshtml" />
     <Content Include="Views\Goal\Transaction.cshtml" />
     <Content Include="Views\Goal\Settings.cshtml" />
+    <Content Include="Views\Shared\blank-external.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

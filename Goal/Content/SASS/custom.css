@@ -1,5 +1,13 @@
+@import url("https://fonts.googleapis.com/css?family=Biryani");
+@import url("https://fonts.googleapis.com/css?family=Merriweather");
 body .body-content {
   margin-top: 2em; }
+body #top-accent {
+  background-color: #2ECC73;
+  top: 10em;
+  height: 0.2em;
+  position: page;
+  z-index: 1; }
 
 /*splash*/
 .index-form .input-group {
@@ -22,6 +30,62 @@ body .body-content {
   color: #333;
   cursor: pointer; }
 
+#transaction-btn-group {
+  text-align: center; }
+  #transaction-btn-group a {
+    text-decoration: none;
+    color: #ffffff; }
+
 /*End splash*/
+/*External*/
+.navbar-top-links a {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 700;
+  color: #333; }
+.navbar-top-links a:hover {
+  color: #2ECC73; }
+
+#external-landing-page {
+  height: 20em; }
+
+#external-page-wrapper {
+  background-color: rgba(0, 0, 0, 0.1);
+  /*background-size: 100%;*/
+  padding: 0 15px;
+  min-height: 568px;
+  /*background-color: #fff;*/
+  position: relative;
+  /*overflow: hidden;*/ }
+  #external-page-wrapper .banner {
+    position: relative;
+    top: 200px;
+    text-align: center; }
+  #external-page-wrapper .orange {
+    color: #FFA339; }
+  #external-page-wrapper .subtitle {
+    font-family: 'Merriweather', serif;
+    font-weight: 500; }
+  #external-page-wrapper .title {
+    font-family: 'Biryani', sans-serif;
+    font-weight: 900;
+    font-size: 7em;
+    color: #333; }
+
+#external-page-wrapper::after {
+  content: "";
+  background: url(../Images/pexels-photo-89505-ferris-wheel.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  opacity: 0.4;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1; }
+
+/*End External*/
 
 /*# sourceMappingURL=custom.css.map */

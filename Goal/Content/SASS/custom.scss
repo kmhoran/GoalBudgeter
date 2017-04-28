@@ -1,38 +1,129 @@
 ﻿$black: #333;
+$blue: 3290BE;
 $danger: #D9534F;
 $danger-light: #FC827F;
+$green: #2ECC73;
+$orange: #FFA339;
+
+$white: #ffffff;
+$exLandingImage: url(../Images/pexels-photo-89505-ferris-wheel.jpeg);
+
+@import url('https://fonts.googleapis.com/css?family=Biryani');
+@import url('https://fonts.googleapis.com/css?family=Merriweather');
 
 body {
-    .body-content{
-        margin-top:2em;
+    .body-content {
+        margin-top: 2em;
+    }
+    #top-accent{
+        background-color:$green;
+        top:10em;
+        height: 0.2em;
+        position:page;
+        z-index:1;
     }
 }
 
 /*splash*/
-.index-form .input-group{
-    margin-bottom:1em;
+.index-form .input-group {
+    margin-bottom: 1em;
 }
-#transaction-btn-group{
+
+#transaction-btn-group {
     margin: auto;
     margin-top: 2em;
     margin-bottom: 2em;
 
-    #select-debit-btn, #select-log-btn{
+    #select-debit-btn, #select-log-btn {
         margin-left: 10em;
     }
 }
 
-.danger-wells{
-    .well{
+.danger-wells {
+    .well {
         background-color: $danger-light;
         border-color: $danger;
         font-weight: 700;
         color: $black;
     }
-    a{
+
+    a {
         text-decoration: none;
         color: $black;
         cursor: pointer;
     }
 }
+
+#transaction-btn-group {
+    text-align: center;
+
+    a {
+        text-decoration: none;
+        color: $white;
+    }
+}
 /*End splash*/
+/*External*/
+.navbar-top-links {
+    a {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-weight: 700;
+        color: $black;
+    }
+    a:hover{
+        color:$green;
+    }
+}
+
+#external-landing-page {
+    height: 20em;
+}
+
+#external-page-wrapper {
+    background-color: rgba(0, 0, 0, 0.1);
+    /*background-size: 100%;*/
+    padding: 0 15px;
+    min-height: 568px;
+    /*background-color: #fff;*/
+    position: relative;
+    /*overflow: hidden;*/
+    .banner {
+        position: relative;
+        top: 200px;
+        text-align: center;
+    }
+
+    .orange {
+        color: $orange;
+    }
+
+    .subtitle {
+        font-family: 'Merriweather', serif;
+        font-weight: 500;
+    }
+
+    .title {
+        font-family: 'Biryani', sans-serif;
+        font-weight: 900;
+        font-size: 7em;
+        color: $black;
+    }
+}
+
+#external-page-wrapper::after {
+    content: "";
+    background: $exLandingImage;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    opacity: 0.4;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+/*End External*/

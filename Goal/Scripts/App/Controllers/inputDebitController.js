@@ -4,38 +4,43 @@
     angular.module(APPNAME)
     .controller('inputDebitController', InputDebitController);
 
-    InputDebitController.$inject = ['$scope', '$logHttpService'];
+    InputDebitController.$inject = ['$scope', '$rootScope', '$route', '$logHttpService'];
 
-    function InputDebitController($scope, $logHttpService) {
+    function InputDebitController ($scope, $rootScope, $route, $logHttpService) {
         // Inject
         var vm = this;
         vm.$scope = $scope;
+        vm.$rootScope = $rootScope;
+        vm.$route = $route;
         vm.$logHttpService = $logHttpService;
 
         // Methods
         vm.submitForm = _submitForm;
+        vm.refreshForm = _refreshRoute;
 
         // Properties
-        vm.title = "Money Earned";
+        vm.title = "Money Spent";
         vm.amount = null;
         vm.category = null;
         vm.date = new Date();
         vm.description = null;
-        vm.null = null;
+
+
+
 
         //_insertCredit();
         // /////////////////////////////////////////////////////////////////////////////////////////
 
         function _submitForm(isFormValid) {
             if (isFormValid) {
-                _insertCredit();
+                _insertDebitit();
             }
         }
 
 
         // .........................................................................................
 
-        function _insertCredit() {
+        function _insertDebitit() {
 
             var data = {
                 amount: vm.amount,
@@ -49,13 +54,33 @@
             // TODO FIXME Delete
             console.log("payload: ", data);
 
-            vm.$logHttpService.insertTransaction(data)
-            .then(function handleCreditInsert(transactionData) {
-                console.log("HttpCreditData: ", transactionData.data);
-            }).catch(_showError);
+            //vm.$logHttpService.insertTransaction(data)
+            //.then(function handleCreditInsert(transactionData) {
+            //    console.log("HttpCreditData: ", transactionData.data);
+            //}).catch(_showError);
+
+            $rootScope.$emit("onToastrSuccess", "Debit Added Successfully!");
+
+            _refreshRoute();
 
         }
 
+
+
+        // .........................................................................................
+
+        function _refreshRoute() {
+            vm.$route.reload();
+        }
+
+        // .........................................................................................
+
+        function _clearFields() {
+            vm.amount = null;
+            vm.category = null;
+            vm.date = new Date();
+            vm.description = null;
+        }
 
         // .........................................................................................
 

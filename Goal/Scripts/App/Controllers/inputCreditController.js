@@ -4,16 +4,19 @@
     angular.module(APPNAME)
     .controller('inputCreditController', InputCreditController);
 
-    InputCreditController.$inject = ['$scope', '$logHttpService'];
+    InputCreditController.$inject = ['$scope', '$rootScope', '$route', '$logHttpService'];
 
-    function InputCreditController($scope, $logHttpService) {
+    function InputCreditController($scope, $rootScope, $route, $logHttpService) {
         // Inject
         var vm = this;
         vm.$scope = $scope;
+        vm.$rootScope = $rootScope;
+        vm.$route = $route;
         vm.$logHttpService = $logHttpService;
 
         // Methods
         vm.submitForm = _submitForm;
+        vm.refreshForm = _refreshRoute;
 
         // Properties
         vm.title = "Money Earned";
@@ -21,7 +24,9 @@
         vm.category = null;
         vm.date = new Date();
         vm.description = null;
-        vm.null = null;
+
+
+        
 
         //_insertCredit();
         // /////////////////////////////////////////////////////////////////////////////////////////
@@ -49,13 +54,33 @@
             // TODO FIXME Delete
             console.log("payload: ", data);
 
-            vm.$logHttpService.insertTransaction(data)
-            .then(function handleCreditInsert(transactionData) {
-                console.log("HttpCreditData: ", transactionData.data);
-            }).catch(_showError);
+            //vm.$logHttpService.insertTransaction(data)
+            //.then(function handleCreditInsert(transactionData) {
+            //    console.log("HttpCreditData: ", transactionData.data);
+            //}).catch(_showError);
+
+            $rootScope.$emit("onToastrSuccess", "Credit Added Successfully!");
+
+            _refreshRoute();
 
         }
 
+
+
+        // .........................................................................................
+
+        function _refreshRoute() {
+            vm.$route.reload();
+        }
+
+        // .........................................................................................
+
+        function _clearFields() {
+            vm.amount = null;
+            vm.category = null;
+            vm.date = new Date();
+            vm.description = null;
+        }
 
         // .........................................................................................
 
