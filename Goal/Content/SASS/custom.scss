@@ -26,6 +26,8 @@ body {
     .well{
         background-color: $danger-light;
         border-color: $danger;
+        font-weight: 700;
+        color: $black;
     }
     a{
         text-decoration: none;

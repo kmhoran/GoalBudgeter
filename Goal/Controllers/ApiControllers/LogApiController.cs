@@ -19,10 +19,14 @@ namespace Goal.Controllers.ApiControllers
         [Route("transaction"), HttpPost]
         public HttpResponseMessage InsertTransaction(TransactionRequestModel model)
         {
-            if (!ModelState.IsValid)
+            string userId = UserService.GetCurrentUserId();
+
+            if (!ModelState.IsValid || userId == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
+
+            model.UserId = userId;
 
             int transactionId = LogService.InsertTransaction(model);
 

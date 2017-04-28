@@ -401,9 +401,11 @@
             angular.module(APPNAME, ['ngRoute']);
         })();
     </script>
-
+    <!-- Routing -->
     <script src="~/Scripts/App/Config/pageRouting.js"></script>
-    <!-- ngRoute Views -->
+    <!-- Services -->
+    <script src="~/Scripts/App/Services/LogHttpService.js"></script>
+    <!-- ngRoute View Controllers -->
     <script src="~/Scripts/App/Controllers/globalController.js"></script>
     <script src="~/Scripts/App/Controllers/splashPageController.js"></script>
     <script src="~/Scripts/App/Controllers/settingsPageController.js"></script>
@@ -413,7 +415,10 @@
     <script src="~/Scripts/App/Controllers/monthPageController.js"></script>
     <script src="~/Scripts/App/Controllers/yearPageController.js"></script>
     <script src="~/Scripts/App/Controllers/wishlistPageController.js"></script>
+
+    <!-- Start page Scripts -->
     @RenderSection("Scripts", false)
+    <!-- End page Scripts -->
 </body>
 </html>
 

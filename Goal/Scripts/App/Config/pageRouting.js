@@ -1,5 +1,4 @@
-﻿/// <reference path="../Templates/splash-index.html" />
-/// <reference path="../Templates/settings.html" />
+﻿// ngRouting for single-page app
 (function () {
     "use strict";
 

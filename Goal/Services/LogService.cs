@@ -25,6 +25,7 @@ namespace Goal.Services
                         paramCollection.AddWithValue("@date", model.Date);
                         paramCollection.AddWithValue("@description", model.Description);
                         paramCollection.AddWithValue("@typeId", model.TypeId);
+                        paramCollection.AddWithValue("@userId", model.UserId);
 
                         var p = new SqlParameter("@transactionId", System.Data.SqlDbType.Int);
                         p.Direction = System.Data.ParameterDirection.Output;
