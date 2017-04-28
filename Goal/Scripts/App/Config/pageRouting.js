@@ -31,7 +31,7 @@
                     // Log
                     templateUrl: '/Scripts/App/Templates/log.html',
                     controller: 'logPageController',
-                    controllerAs: 'logC'
+                    controllerAs: 'LogC'
                 }).when('/month', {
                     // Month
                     templateUrl: '/Scripts/App/Templates/month.html',

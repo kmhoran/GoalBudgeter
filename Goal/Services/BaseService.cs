@@ -7,9 +7,6 @@ using System.Web;
 
 namespace  Goal.Services
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public abstract class BaseService
     {
         protected static IDao DataProvider
