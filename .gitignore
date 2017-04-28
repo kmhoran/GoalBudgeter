@@ -3,6 +3,9 @@
 # ignore webconfig
 Goal/Web.config
 
+# ignore App_Data
+Goal/App_Data
+
 # .........................
 
 ## Ignore Visual Studio temporary files, build results, and
