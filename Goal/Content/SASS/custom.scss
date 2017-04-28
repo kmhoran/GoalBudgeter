@@ -6,7 +6,7 @@ $green: #2ECC73;
 $orange: #FFA339;
 
 $white: #ffffff;
-$exLandingImage: url(../Images/pexels-photo-89505-ferris-wheel.jpeg);
+$exLandingImage: url(../Images/pexels-photo-89505-ferris-wheel-min.jpg);
 
 @import url('https://fonts.googleapis.com/css?family=Biryani');
 @import url('https://fonts.googleapis.com/css?family=Merriweather');
@@ -24,6 +24,15 @@ body {
     }
 }
 
+.bar-accent{
+    border-left: 5px solid $green;
+    padding-left: 1em;
+}
+input.big{
+    height:45px;
+    font-size:15pt;
+}
+
 /*splash*/
 .index-form .input-group {
     margin-bottom: 1em;
@@ -34,9 +43,11 @@ body {
     margin-top: 2em;
     margin-bottom: 2em;
 
-    #select-debit-btn, #select-log-btn {
-        margin-left: 10em;
+    .transaction-btn{
+        margin: 0 auto 1em auto;
+        text-align:center;
     }
+
 }
 
 .danger-wells {
@@ -64,7 +75,7 @@ body {
 }
 /*End splash*/
 /*External*/
-.navbar-top-links {
+.navbar-nav {
     a {
         font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
         font-weight: 700;
@@ -89,7 +100,7 @@ body {
     /*overflow: hidden;*/
     .banner {
         position: relative;
-        top: 200px;
+        top: 140px;
         text-align: center;
     }
 
@@ -124,6 +135,17 @@ body {
     right: 0;
     position: absolute;
     z-index: -1;
+}
+#title-section{
+    margin-bottom: 4em;
+    
+}
+
+#ex-login{
+    padding: 2em;
+    background-color: $white;
+    min-height: 568px;
+    position: relative;
 }
 
 /*End External*/

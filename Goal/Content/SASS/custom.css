@@ -9,6 +9,14 @@ body #top-accent {
   position: page;
   z-index: 1; }
 
+.bar-accent {
+  border-left: 5px solid #2ECC73;
+  padding-left: 1em; }
+
+input.big {
+  height: 45px;
+  font-size: 15pt; }
+
 /*splash*/
 .index-form .input-group {
   margin-bottom: 1em; }
@@ -17,8 +25,9 @@ body #top-accent {
   margin: auto;
   margin-top: 2em;
   margin-bottom: 2em; }
-  #transaction-btn-group #select-debit-btn, #transaction-btn-group #select-log-btn {
-    margin-left: 10em; }
+  #transaction-btn-group .transaction-btn {
+    margin: 0 auto 1em auto;
+    text-align: center; }
 
 .danger-wells .well {
   background-color: #FC827F;
@@ -38,11 +47,11 @@ body #top-accent {
 
 /*End splash*/
 /*External*/
-.navbar-top-links a {
+.navbar-nav a {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 700;
   color: #333; }
-.navbar-top-links a:hover {
+.navbar-nav a:hover {
   color: #2ECC73; }
 
 #external-landing-page {
@@ -58,7 +67,7 @@ body #top-accent {
   /*overflow: hidden;*/ }
   #external-page-wrapper .banner {
     position: relative;
-    top: 200px;
+    top: 140px;
     text-align: center; }
   #external-page-wrapper .orange {
     color: #FFA339; }
@@ -73,7 +82,7 @@ body #top-accent {
 
 #external-page-wrapper::after {
   content: "";
-  background: url(../Images/pexels-photo-89505-ferris-wheel.jpeg);
+  background: url(../Images/pexels-photo-89505-ferris-wheel-min.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -85,6 +94,15 @@ body #top-accent {
   right: 0;
   position: absolute;
   z-index: -1; }
+
+#title-section {
+  margin-bottom: 4em; }
+
+#ex-login {
+  padding: 2em;
+  background-color: #ffffff;
+  min-height: 568px;
+  position: relative; }
 
 /*End External*/
 
