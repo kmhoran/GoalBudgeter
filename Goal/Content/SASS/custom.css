@@ -17,6 +17,9 @@ input.big {
   height: 45px;
   font-size: 15pt; }
 
+.orange {
+  color: #FFA339; }
+
 /*splash*/
 .index-form .input-group {
   margin-bottom: 1em; }

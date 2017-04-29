@@ -6,6 +6,8 @@
 @section Meta{
     <!-- Toastr -->
     <link href="~/Content/Toastr/toastr.css" rel="stylesheet" />
+    <!-- Morris Graph -->
+    <link href="~/Content/Theme/Vendor/morris.css" rel="stylesheet" />
 }
 
 <div ng-view></div>
@@ -16,12 +18,15 @@
     <!-- Angular 1 -->
     <script src="~/Scripts/bower_components/angular/angular.min.js"></script>
     <script src="~/Scripts/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="~/Scripts/bower_components/raphael/raphael.min.js"></script>
+    <script src="~/Scripts/bower_components/morris.js/morris.js"></script>
+    <script src="~/Scripts/bower_components/angular-morris/build/module/angular-morris/angular-morris.min.js"></script>
     <script>
         var APPNAME = "GoalApp";
 
         (function () {
             "use strict"
-            angular.module(APPNAME, ['ngRoute']);
+            angular.module(APPNAME, ['ngRoute', 'angular.morris']);
         })();
     </script>
     <!-- Routing -->
@@ -38,4 +43,9 @@
     <script src="~/Scripts/App/Controllers/monthPageController.js"></script>
     <script src="~/Scripts/App/Controllers/yearPageController.js"></script>
     <script src="~/Scripts/App/Controllers/wishlistPageController.js"></script>
+    <!-- Morris Charts -->
+    @*<script src="~/Scripts/Theme/vendor/raphael.min.js"></script>
+        <script src="~/Scripts/Theme/vendor/morris.js"></script>
+        <script src="~/Scripts/Theme/vendor/morris-data.js"></script>*@
+
 }
