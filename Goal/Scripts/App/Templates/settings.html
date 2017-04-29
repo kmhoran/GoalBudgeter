@@ -2,28 +2,160 @@
 <!--settingsPageController as SetC  -->
 <div class="row">
     <div class="col-md-12 col-sm-12">
-        <h2>Settings</h2>
+        <div class="row">
+            <h2 class="bar-accent">Settings</h2>
+            <section id="general-settings-group">
+                <h3>General Settings</h3>
+                <hr />
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            Add Expense Category
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <form class="index-form">
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-lg big" maxlength="20" placeholder="Title" />
+                                </div>
+                                <button type="button" class="btn btn-primary btn-lg">Add</button>
+                            </form>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            Expense Categories
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Action</th>
 
-        <h3>Monthly Settings</h3>
-        <hr />
-        <ul>
-            <li>Predictive Settings</li>
-            <li>Monthly Goal</li>
-        </ul>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Food</td>
+                                            <td><a href="#"><span class="fa fa-trash"></span></a></td>
+                                        </tr>
+                                        <tr>
 
-        <h3>Yearly Settings</h3>
-        <hr />
-        <ul>
-            <li>Starting Amount</li>
-            <li>Yearly Goal</li>
-        </ul>
+                                            <td>Utilities</td>
+                                            <td><a href="#"><span class="fa fa-trash"></span></a></td>
 
-        <h3>General Settings</h3>
-        <hr />
-        <ul>
-            <li>Categories</li>
-        </ul>
+                                        </tr>
+                                        <tr>
+
+                                            <td>Travel</td>
+                                            <td><a href="#"><span class="fa fa-trash"></span></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            Add Income Category
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <form class="index-form">
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-lg big" maxlength="20" placeholder="Title" />
+                                </div>
+                                <button type="button" class="btn btn-primary btn-lg">Add</button>
+                            </form>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            Income Categories
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Paycheck</td>
+                                            <td><a href="#"><span class="fa fa-trash"></span></a></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>Gifts</td>
+                                            <td><a href="#"><span class="fa fa-trash"></span></a></td>
+
+                                        </tr>
+                                        <tr>
+
+                                            <td>Bonus</td>
+                                            <td><a href="#"><span class="fa fa-trash"></span></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-md-3 -->
+
+            </section>
+        </div>
+        <!-- ./general -->
+        <div class="row">
+            <section class="monthly-settings-group">
+                <h3>Monthly Settings</h3>
+                <hr />
+                <ul>
+                    <li>Predictive Settings</li>
+                    <li>Monthly Goal</li>
+                </ul>
+            </section>
+        </div>
+        <!-- ./month -->
+        <div class="row">
+            <section id="yearly-settings-group">
+                <h3>Yearly Settings</h3>
+                <hr />
+                <ul>
+                    <li>Starting Amount</li>
+                    <li>Yearly Goal</li>
+                </ul>
+            </section>
+        </div>
+        <!-- ./year -->
+
     </div>
 </div>
 <!-- End Settings -->
-

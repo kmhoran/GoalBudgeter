@@ -15,26 +15,44 @@ body {
     .body-content {
         margin-top: 2em;
     }
-    #top-accent{
-        background-color:$green;
-        top:10em;
+
+    #top-accent {
+        background-color: $green;
+        top: 10em;
         height: 0.2em;
-        position:page;
-        z-index:1;
+        position: page;
+        z-index: 1;
     }
 }
 
-.bar-accent{
+.bar-accent {
     border-left: 5px solid $green;
     padding-left: 1em;
 }
-input.big{
-    height:45px;
-    font-size:15pt;
+
+input.big {
+    height: 45px;
+    font-size: 15pt;
 }
 
-.orange{
-    color:$orange;
+.orange {
+    color: $orange;
+}
+
+.panel {
+
+    .panel-heading {
+        font-weight: 700;
+    }
+
+    .panel-body.md {
+        max-height: 25em;
+        
+    }
+
+    .panel-scroll{
+        overflow-y: scroll;
+    }
 }
 
 /*splash*/
@@ -47,11 +65,10 @@ input.big{
     margin-top: 2em;
     margin-bottom: 2em;
 
-    .transaction-btn{
+    .transaction-btn {
         margin: 0 auto 1em auto;
-        text-align:center;
+        text-align: center;
     }
-
 }
 
 .danger-wells {
@@ -78,6 +95,13 @@ input.big{
     }
 }
 /*End splash*/
+/*Authenticated layout*/
+.nav li #logoutForm {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+/*End Authenticated Layout*/
 /*External*/
 .navbar-nav {
     a {
@@ -85,8 +109,9 @@ input.big{
         font-weight: 700;
         color: $black;
     }
-    a:hover{
-        color:$green;
+
+    a:hover {
+        color: $green;
     }
 }
 
@@ -140,12 +165,12 @@ input.big{
     position: absolute;
     z-index: -1;
 }
-#title-section{
+
+#title-section {
     margin-bottom: 4em;
-    
 }
 
-#ex-login{
+#ex-login {
     padding: 2em;
     background-color: $white;
     min-height: 568px;

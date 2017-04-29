@@ -20,6 +20,13 @@ input.big {
 .orange {
   color: #FFA339; }
 
+.panel .panel-heading {
+  font-weight: 700; }
+.panel .panel-body.md {
+  max-height: 25em; }
+.panel .panel-scroll {
+  overflow-y: scroll; }
+
 /*splash*/
 .index-form .input-group {
   margin-bottom: 1em; }
@@ -49,6 +56,13 @@ input.big {
     color: #ffffff; }
 
 /*End splash*/
+/*Authenticated layout*/
+.nav li #logoutForm {
+  position: relative;
+  display: block;
+  padding: 10px 15px; }
+
+/*End Authenticated Layout*/
 /*External*/
 .navbar-nav a {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
