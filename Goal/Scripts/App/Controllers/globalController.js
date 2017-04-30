@@ -4,14 +4,15 @@
     angular.module(APPNAME)
     .controller('globalController', GlobalController);
 
-    GlobalController.$inject = ['$scope', '$rootScope'];
+    GlobalController.$inject = ['$scope', '$rootScope', '$logHttpService'];
 
-    function GlobalController($scope, $rootScope) {
+    function GlobalController($scope, $rootScope, $logHttpService) {
 
         // Injection
         var vm = this;
         vm.$scope = $scope;
         vm.$rootScope = $rootScope;
+        vm.$logHttpService = $logHttpService;
 
         // Properties
         toastr.options = {
@@ -32,16 +33,45 @@
             "hideMethod": "fadeOut"
         };
 
+        vm.credits = null;
+        vm.debits = null;
+
+        // Startup Functions
+        _getTransactionCategories()
 
         // /////////////////////////////////////////////////////////////////////////////////////////
+        // $rootscope broadcasting
 
         vm.$rootScope.$on("onToastrSuccess", function (event, messageIn) {
             _onToastrSuccess(messageIn);
         });
 
+        vm.$rootScope.$on("RefreshCategories", function () {
+            _getTransactionCategories();
+        })
+        // /////////////////////////////////////////////////////////////////////////////////////////
 
         function _onToastrSuccess(message) {
             toastr.success(message);
+        }
+
+
+        // .........................................................................................
+
+        function _getTransactionCategories() {
+            $logHttpService.getTransactionCategories()
+            .then(function populateCategories(categories) {
+                vm.credits = categories.data.Item.Credits;
+                vm.debits = categories.data.Item.Debits
+
+            }).catch(_showError);
+        }
+
+
+        // .........................................................................................
+
+        function _showError(error) {
+            console.log("Something went wrong: ", error);
         }
 
 

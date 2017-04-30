@@ -7,55 +7,30 @@
             <section id="general-settings-group">
                 <h3>General Settings</h3>
                 <hr />
-                <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="panel panel-red">
                         <div class="panel-heading">
-                            Add Expense Category
+                            Manage Expense Categories
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <form class="index-form">
-                                <div class="input-group">
-                                    <input type="text" class="form-control form-control-lg big" maxlength="20" placeholder="Title" />
-                                </div>
-                                <button type="button" class="btn btn-primary btn-lg">Add</button>
+                                <input type="text" class="form-control form-control-lg big" ng-model="SetC.debitToAdd" maxlength="20" placeholder="Category Name" />
+                                <button type="button" class="btn btn-primary btn-lg add-category" ng-click="SetC.addDebit()"><span class="fa fa-plus"></span> Add</button>
                             </form>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-md-3 -->
-                <div class="col-md-3 col-sm-3 col-xs-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            Expense Categories
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
+                            <hr />
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th>Category</th>
-                                            <th>Action</th>
+                                            <th>Delete</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Food</td>
-                                            <td><a href="#"><span class="fa fa-trash"></span></a></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>Utilities</td>
-                                            <td><a href="#"><span class="fa fa-trash"></span></a></td>
-
-                                        </tr>
-                                        <tr>
-
-                                            <td>Travel</td>
+                                        <tr ng-repeat="debit in GLOB.debits">
+                                            <td>{{debit.Name}}</td>
                                             <td><a href="#"><span class="fa fa-trash"></span></a></td>
                                         </tr>
                                     </tbody>
@@ -67,56 +42,32 @@
                     </div>
                     <!-- /.panel -->
                 </div>
-                <!-- /.col-md-3 -->
-                <div class="col-md-3 col-sm-3 col-xs-6">
+                <!-- /.col-md-6 -->
+
+                <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="panel panel-green">
                         <div class="panel-heading">
-                            Add Income Category
+                            Manage Income Categories
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <form class="index-form">
-                                <div class="input-group">
-                                    <input type="text" class="form-control form-control-lg big" maxlength="20" placeholder="Title" />
-                                </div>
-                                <button type="button" class="btn btn-primary btn-lg">Add</button>
+                                    <input type="text" class="form-control form-control-lg big" ng-model="SetC.creditToAdd" maxlength="20" placeholder="Category Name" />
+                                    <button type="button" class="btn btn-primary btn-lg add-category" ng-click="SetC.addCredit()"><span class="fa fa-plus"></span> Add</button>
                             </form>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-md-3 -->
-                <div class="col-md-3 col-sm-3 col-xs-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            Income Categories
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
+                            <hr />
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th>Category</th>
-                                            <th>Action</th>
+                                            <th>Delete</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Paycheck</td>
-                                            <td><a href="#"><span class="fa fa-trash"></span></a></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>Gifts</td>
-                                            <td><a href="#"><span class="fa fa-trash"></span></a></td>
-
-                                        </tr>
-                                        <tr>
-
-                                            <td>Bonus</td>
+                                        <tr ng-repeat="credit in GLOB.credits">
+                                            <td>{{credit.Name}}</td>
                                             <td><a href="#"><span class="fa fa-trash"></span></a></td>
                                         </tr>
                                     </tbody>
@@ -128,7 +79,7 @@
                     </div>
                     <!-- /.panel -->
                 </div>
-                <!-- /.col-md-3 -->
+                <!-- /.col-md-6 -->
 
             </section>
         </div>

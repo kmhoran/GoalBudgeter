@@ -11,7 +11,9 @@
         var baseUrl = "/api/log"
 
         return {
-            insertTransaction: _insertTransaction
+            insertTransaction: _insertTransaction,
+            getTransactionCategories: _getTransactionCategories,
+            insertTransactionCategory: _insertTransactionCategory
         };
 
         // /////////////////////////////////////////////////////////////////////////////////////////
@@ -25,6 +27,30 @@
 
             return $http(settings);
 
+        }
+
+        // .........................................................................................
+
+        function _getTransactionCategories() {
+            var settings = {
+                method: "GET",
+                url: baseUrl.concat("/categories")
+            };
+
+            return $http(settings);
+        }
+
+
+        // .........................................................................................
+
+        function _insertTransactionCategory(data) {
+            var settings = {
+                method: "POST",
+                url: baseUrl.concat("/categories"),
+                data: data
+            };
+
+            return $http(settings);
         }
     }
 

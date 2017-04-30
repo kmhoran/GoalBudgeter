@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Goal.Models.Requests
 {
-    public class TransactionRequestModel
+    public class TransactionInsertRequest
     {
         [Required]
         public decimal Amount { get; set; }

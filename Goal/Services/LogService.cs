@@ -1,6 +1,8 @@
 ﻿
 using Goal.Enums;
+using Goal.Models.Domain;
 using Goal.Models.Requests;
+using Sabio.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -14,9 +16,9 @@ namespace Goal.Services
     public class LogService : BaseService
     {
 
-        public static int InsertTransaction(TransactionRequestModel model)
+        public static int InsertTransaction(TransactionInsertRequest model)
         {
-            int id = 0;
+            int transactionId = 0;
 
             try
             {
@@ -37,7 +39,7 @@ namespace Goal.Services
 
                     }, returnParameters: delegate (SqlParameterCollection param)
                     {
-                        int.TryParse(param["@transactionId"].Value.ToString(), out id);
+                        int.TryParse(param["@transactionId"].Value.ToString(), out transactionId);
                     });
             }
             catch (Exception e)
@@ -45,8 +47,88 @@ namespace Goal.Services
                 throw e;
             }
 
-            return id;
+            return transactionId;
 
+        }
+
+
+
+        // .........................................................................................
+
+        public static CategoryCollectionDomain GetUserCategories(string userId)
+        {
+            var credits = new List<CategoryDomain>();
+            var debits = new List<CategoryDomain>();
+            var collection = new CategoryCollectionDomain { Credits=credits, Debits=debits};
+
+            try
+            {
+                DataProvider.ExecuteCmd(GetConnection, "dbo.select_category_byUserId",
+                    inputParamMapper: delegate (SqlParameterCollection paramCollection)
+                    {
+                        paramCollection.AddWithValue("@userId", userId);
+                    }, 
+                    map: delegate(IDataReader reader, short set)
+                    {
+                        var category = new CategoryDomain();
+                        int startingIndex = 0;
+
+                        category.CategoryId = reader.GetSafeInt32(startingIndex++);
+                        category.UserId = reader.GetSafeString(startingIndex++);
+                        category.Name = reader.GetSafeString(startingIndex++);
+                        category.TypeId = (TransactionType)reader.GetSafeInt32(startingIndex++);
+
+                        if(category.TypeId == TransactionType.Credit)
+                        {
+                            collection.Credits.Add(category);
+                        }
+                        else
+                        {
+                            collection.Debits.Add(category);
+                        }
+                    });   
+            }
+            catch(Exception e )
+            {
+                throw e;
+            }
+
+            return collection;
+        }
+
+
+
+        // .........................................................................................
+
+        public static int InsertCategory(CategoryInsertRequest model)
+        {
+            int categoryId = 0;
+
+            try
+            {
+                DataProvider.ExecuteNonQuery(GetConnection, "dbo.insert_category",
+                    inputParamMapper: delegate(SqlParameterCollection paramCollection)
+                    {
+                        paramCollection.AddWithValue("@userId", model.UserId);
+                        paramCollection.AddWithValue("@name", model.Name);
+                        paramCollection.AddWithValue("@transactionTypeId", (int)model.TypeId);
+
+                        var p = new SqlParameter("@categoryId", System.Data.SqlDbType.Int);
+                        p.Direction = System.Data.ParameterDirection.Output;
+
+                        paramCollection.Add(p);
+                    },
+                    returnParameters: delegate (SqlParameterCollection param)
+                    {
+                        int.TryParse(param["@categoryId"].Value.ToString(), out categoryId);
+                    });
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+
+            return categoryId;
         }
 
 

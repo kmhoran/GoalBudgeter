@@ -1,4 +1,5 @@
-﻿using Goal.Models.Requests;
+﻿using Goal.Models.Domain;
+using Goal.Models.Requests;
 using Goal.Services;
 using Sabio.Web.Models.Responses;
 using System;
@@ -17,7 +18,7 @@ namespace Goal.Controllers.ApiControllers
     public class LogApiController: ApiController
     {
         [Route("transaction"), HttpPost]
-        public HttpResponseMessage InsertTransaction(TransactionRequestModel model)
+        public HttpResponseMessage InsertTransaction(TransactionInsertRequest model)
         {
             string userId = UserService.GetCurrentUserId();
 
@@ -31,6 +32,51 @@ namespace Goal.Controllers.ApiControllers
             int transactionId = LogService.InsertTransaction(model);
 
             var response = new ItemResponse<int> { Item = transactionId };
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
+
+
+        // .........................................................................................
+
+        [Route("categories"), HttpGet]
+        public HttpResponseMessage GetUserTransactionCategories()
+        {
+            if (!UserService.IsLoggedIn())
+            {
+                HttpError error = new HttpError { Message = "Cannot process request for unauthenticated user." };
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, error);
+            }
+             string userId = UserService.GetCurrentUserId();
+
+            CategoryCollectionDomain collection = LogService.GetUserCategories(userId);
+
+            var response = new ItemResponse<CategoryCollectionDomain> { Item = collection };
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
+
+
+        // .........................................................................................
+
+        [Route("categories"), HttpPost]
+        public HttpResponseMessage InsertCategory(CategoryInsertRequest model)
+        {
+            if (!UserService.IsLoggedIn())
+            {
+                HttpError error = new HttpError { Message = "Cannot process request for unauthenticated user." };
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, error);
+            }
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            model.UserId = UserService.GetCurrentUserId();
+
+            int categoryId = LogService.InsertCategory(model);
+
+            var response = new ItemResponse<int> { Item = categoryId };
 
             return Request.CreateResponse(HttpStatusCode.OK, response);
         }
