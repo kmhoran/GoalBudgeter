@@ -19,8 +19,10 @@
         vm.refreshForm = _refreshRoute;
 
         // Properties
+        vm.type = "credit";
         vm.title = "Money Earned";
         vm.amount = null;
+        vm.categories = vm.$scope.$parent.credits;
         vm.category = null;
         vm.date = new Date();
         vm.description = null;

@@ -184,13 +184,15 @@ namespace Goal.Services
             table.Columns.Add("UserId", typeof(string));
             table.Columns.Add("Name", typeof(string));
             table.Columns.Add("TransactionTypeId", typeof(int));
+            table.Columns.Add("ForecastType", typeof(int));
+            table.Columns.Add("Amount", typeof(decimal));
 
 
             // Add rows to Table
             int count = 0;
             foreach (var kvp in defaultCategories)
             {
-                table.Rows.Add(count, userId, kvp.Key, (int)kvp.Value);
+                table.Rows.Add(count, userId, kvp.Key, (int)kvp.Value, (int)ForecastType.Fixed, 20.00);
                 count += 1;
             }
 

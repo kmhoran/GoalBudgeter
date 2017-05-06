@@ -187,6 +187,7 @@
     <Compile Include="Controllers\GoalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Enums\ForecastType.cs" />
     <Compile Include="Enums\TransactionType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -215,6 +216,7 @@
     <Content Include="Content\SASS\custom.css" />
     <Content Include="Content\Theme\sb-admin-2.css" />
     <Content Include="Content\Theme\sb-admin-2.min.css" />
+    <Content Include="Content\Theme\Vendor\chosen.min.css" />
     <Content Include="Content\Theme\Vendor\font-awesome.min.css" />
     <Content Include="Content\Theme\Vendor\metisMenu.css" />
     <Content Include="Content\Theme\Vendor\metisMenu.min.css" />
@@ -252,6 +254,10 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Content\SASS\custom.scss" />
+    <Content Include="Scripts\bower_components\angular-chosen\angular-chosen.js" />
+    <Content Include="Scripts\bower_components\angular-chosen\chosen-spinner.css" />
+    <Content Include="Scripts\bower_components\angular-chosen\chosen.jquery.min.js" />
+    <Content Include="Scripts\bower_components\angular-chosen\spinner.gif" />
     <Content Include="Scripts\bower_components\angular-morris\build\module\angular-morris\angular-morris.js" />
     <Content Include="Scripts\bower_components\angular-morris\build\module\angular-morris\angular-morris.min.js" />
     <Content Include="Scripts\bower_components\angular-morris\client\gulpfile.js" />
@@ -428,6 +434,10 @@
     <Content Include="Scripts\bower_components\raphael\.bower.json" />
     <Content Include="Scripts\bower_components\raphael\bower.json" />
     <Content Include="Scripts\bower_components\raphael\yarn.lock" />
+    <Content Include="Scripts\bower_components\angular-chosen\.bower.json" />
+    <Content Include="Scripts\bower_components\angular-chosen\bower.json" />
+    <Content Include="Scripts\bower_components\angular-chosen\README.md" />
+    <Content Include="Scripts\bower_components\angular-chosen\src\angular-chosen.coffee" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bower_components\angular\angular-csp.css" />
     <Content Include="Scripts\bower_components\angular\angular.js" />

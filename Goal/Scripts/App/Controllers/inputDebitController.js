@@ -19,8 +19,10 @@
         vm.refreshForm = _refreshRoute;
 
         // Properties
+        vm.type = "debit";
         vm.title = "Money Spent";
         vm.amount = null;
+        vm.categories = $scope.$parent.test;
         vm.category = null;
         vm.date = new Date();
         vm.description = null;

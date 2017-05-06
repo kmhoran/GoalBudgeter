@@ -35,7 +35,7 @@
 
         vm.credits = null;
         vm.debits = null;
-
+        vm.test = "TEST"
         // Startup Functions
         _getTransactionCategories()
 
@@ -62,7 +62,9 @@
             $logHttpService.getTransactionCategories()
             .then(function populateCategories(categories) {
                 vm.credits = categories.data.Item.Credits;
-                vm.debits = categories.data.Item.Debits
+                vm.debits = categories.data.Item.Debits;
+
+                $rootScope.$broadcast("RefreshCreditCategories")
 
             }).catch(_showError);
         }

@@ -3,33 +3,30 @@
 <div class="row">
     <div class="col-md-12 col-sm-12">
         <h2 class="bar-accent">{{InC.title}}</h2>
-        <hr/>
+        <hr />
         <form name="inputForm" class="form-inline index-form danger-wells" ng-submit="InC.submitForm(inputForm.$valid)" novalidate>
             <!-- Amount -->
             <div class="input-group" ng-class="{'has-error': inputForm.amount.$invalid && !inputForm.amount.$pristine, 'has-success':inputForm.amount.$valid && !inputForm.amount.$pristine}">
                 <div class="input-group-addon"><span class="fa fa-money"></span></div>
-                <input name="amount" type="number" step="0.01" min="0.01" class="form-control form-control-lg" ng-model="InC.amount" placeholder="Amount" required/>
+                <input name="amount" type="number" step="0.01" min="0.01" class="form-control form-control-lg" ng-model="InC.amount" placeholder="Amount" required />
             </div>
             <p ng-show="inputForm.amount.$invalid && !inputForm.amount.$pristine" class="well well-sm">Enter a valid cash value.</p>
-           
+
             <!-- Description -->
-             <div class="input-group" ng-class="{'has-error': inputForm.description.$invalid && !inputForm.description.$pristine, 'has-success':inputForm.description.$valid && !inputForm.description.$pristine}">
+            <div class="input-group" ng-class="{'has-error': inputForm.description.$invalid && !inputForm.description.$pristine, 'has-success':inputForm.description.$valid && !inputForm.description.$pristine}">
                 <div class="input-group-addon"><span class="fa fa-info-circle"></span></div>
-                <input name="description" type="text" class="form-control form-control-lg" ng-model="InC.description" maxlength="45" placeholder="Description" required/>
+                <input name="description" type="text" class="form-control form-control-lg" ng-model="InC.description" maxlength="45" placeholder="Description" required />
             </div>
             <p ng-show="inputForm.description.$invalid && !inputForm.description.$pristine" class="well well-sm">A description is required.</p>
-            
             <!-- Category -->
             <div class="input-group" ng-class="{'has-error': inputForm.category == null && !inputForm.category.$pristine, 'has-success':inputForm.category != null && !inputForm.category.$pristine}">
                 <div class="input-group-addon"><span class="fa fa-list"></span></div>
-                <select name="category" class="form-control" ng-model="InC.category" required>
-                    <option>Test 1</option>
-                    <option>Test 2</option>
-                    <option>Test 3</option>
+                <select placeholder-text-single="rest" name="category" class="form-control" ng-model="InC.category"  required>
+                    <option ng-if="InC.type=='credit'" value="{{category.Name}}" ng-repeat="category in GLOB.credits">{{category.Name}}</option>
+                    <option ng-if="InC.type=='debit'" value="{{category.Name}}" ng-repeat="category in GLOB.debits">{{category.Name}}</option>
                 </select>
             </div>
-            <p ng-show="inputForm.category == '--Select Category--' && !inputForm.category.$pristine" class="well well-sm">A category selection is required.</p>
-            
+
             <!-- Date -->
             <div class="input-group" ng-class="{'has-error': inputForm.date.$invalid, 'has-success':inputForm.date.$valid}">
                 <div class="input-group-addon"><span class="fa fa-calendar"></span></div>

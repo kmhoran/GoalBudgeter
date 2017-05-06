@@ -52,8 +52,8 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <form class="index-form">
-                                    <input type="text" class="form-control form-control-lg big" ng-model="SetC.creditToAdd" maxlength="20" placeholder="Category Name" />
-                                    <button type="button" class="btn btn-primary btn-lg add-category" ng-click="SetC.addCredit()"><span class="fa fa-plus"></span> Add</button>
+                                <input type="text" class="form-control form-control-lg big" ng-model="SetC.creditToAdd" maxlength="20" placeholder="Category Name" />
+                                <button type="button" class="btn btn-primary btn-lg add-category" ng-click="SetC.addCredit()"><span class="fa fa-plus"></span> Add</button>
                             </form>
                             <hr />
                             <div class="table-responsive">
@@ -88,10 +88,55 @@
             <section class="monthly-settings-group">
                 <h3>Monthly Settings</h3>
                 <hr />
-                <ul>
-                    <li>Predictive Settings</li>
-                    <li>Monthly Goal</li>
-                </ul>
+                <p ng-repeat="debit in GLOB.debits">{{debit}}</p>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            Manage Expense Categories
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Forcast Type <span class="fa fa-question-circle"></span></th>
+                                            <th>Value</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="debit in GLOB.debits">
+                                            <td>{{debit.Name}}</td>
+                                            <td>
+                                                <form class="form-check form-check-inline">
+                                                    <lable for="radio-fixed" class="form-check-label">
+                                                        <input id="radio-fixed" class="form-check-input" type="radio" name="forcastType" value="0" checked />
+                                                        Fixed
+                                                    </lable>
+                                                    <lable for="radio-average" class="form-check-label">
+                                                        <input id="radio-average" class="form-check-input" type="radio" name="forcastType" value="1" />
+                                                        Average
+                                                    </lable>
+                                                    <lable for="radio-relative" class="form-check-label">
+                                                        <input id="radio-relative" class="form-check-input" type="radio" name="forcastType" value="2" />
+                                                        Relative
+                                                    </lable>
+                                                </form>
+                                            </td>
+                                            <td><form><input type="number" /></form></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-md-6 -->
             </section>
         </div>
         <!-- ./month -->
