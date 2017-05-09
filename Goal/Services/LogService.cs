@@ -71,12 +71,19 @@ namespace Goal.Services
                     map: delegate(IDataReader reader, short set)
                     {
                         var category = new CategoryDomain();
+                        var predictions = new PredictionCollectionDomain();
                         int startingIndex = 0;
 
                         category.CategoryId = reader.GetSafeInt32(startingIndex++);
                         category.UserId = reader.GetSafeString(startingIndex++);
                         category.Name = reader.GetSafeString(startingIndex++);
                         category.TypeId = (TransactionType)reader.GetSafeInt32(startingIndex++);
+                        category.ForecastType = reader.GetSafeString(startingIndex++);
+                        predictions.Fixed = reader.GetSafeInt32(startingIndex++);
+                        predictions.Average = reader.GetSafeInt32(startingIndex++);
+                        predictions.Relative = reader.GetSafeInt32(startingIndex++);
+
+                        category.Predictions = predictions;
 
                         if(category.TypeId == TransactionType.Credit)
                         {
@@ -112,7 +119,8 @@ namespace Goal.Services
                         paramCollection.AddWithValue("@userId", model.UserId);
                         paramCollection.AddWithValue("@name", model.Name);
                         paramCollection.AddWithValue("@transactionTypeId", (int)model.TypeId);
-
+                        paramCollection.AddWithValue("@forecastType", model.ForecastType);
+                        paramCollection.AddWithValue("@fixedPrediction", model.FixedPrediction);
                         var p = new SqlParameter("@categoryId", System.Data.SqlDbType.Int);
                         p.Direction = System.Data.ParameterDirection.Output;
 
@@ -184,15 +192,15 @@ namespace Goal.Services
             table.Columns.Add("UserId", typeof(string));
             table.Columns.Add("Name", typeof(string));
             table.Columns.Add("TransactionTypeId", typeof(int));
-            table.Columns.Add("ForecastType", typeof(int));
-            table.Columns.Add("Amount", typeof(decimal));
+            table.Columns.Add("ForecastType", typeof(string));
+            table.Columns.Add("FixedPrediction", typeof(int));
 
 
             // Add rows to Table
             int count = 0;
             foreach (var kvp in defaultCategories)
             {
-                table.Rows.Add(count, userId, kvp.Key, (int)kvp.Value, (int)ForecastType.Fixed, 20.00);
+                table.Rows.Add(count, userId, kvp.Key, (int)kvp.Value, "Fixed", 20);
                 count += 1;
             }
 

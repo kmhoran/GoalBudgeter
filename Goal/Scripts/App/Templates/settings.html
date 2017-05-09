@@ -8,6 +8,42 @@
                 <h3>General Settings</h3>
                 <hr />
                 <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            Manage Income Categories
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <form class="index-form">
+                                <input type="text" class="form-control form-control-lg big" ng-model="SetC.creditToAdd" maxlength="20" placeholder="Category Name" />
+                                <button type="button" class="btn btn-primary btn-lg add-category" ng-click="SetC.addCredit()"><span class="fa fa-plus"></span> Add</button>
+                            </form>
+                            <hr />
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Delete</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="credit in GLOB.credits">
+                                            <td>{{credit.Name}}</td>
+                                            <td><a href="#"><span class="fa fa-trash"></span></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-md-6 -->
+                <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="panel panel-red">
                         <div class="panel-heading">
                             Manage Expense Categories
@@ -44,31 +80,54 @@
                 </div>
                 <!-- /.col-md-6 -->
 
-                <div class="col-md-6 col-sm-6 col-xs-12">
+            </section>
+        </div>
+        <!-- ./general -->
+
+        <div class="row">
+            <section class="monthly-settings-group">
+                <h3>Monthly Settings</h3>
+                <hr />
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="panel panel-green">
                         <div class="panel-heading">
                             Manage Income Categories
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <form class="index-form">
-                                <input type="text" class="form-control form-control-lg big" ng-model="SetC.creditToAdd" maxlength="20" placeholder="Category Name" />
-                                <button type="button" class="btn btn-primary btn-lg add-category" ng-click="SetC.addCredit()"><span class="fa fa-plus"></span> Add</button>
-                            </form>
-                            <hr />
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th>Category</th>
-                                            <th>Delete</th>
+                                            <th>Forcast Type <span class="fa fa-question-circle"></span></th>
+                                            <th>Prediced Value</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="credit in GLOB.credits">
-                                            <td>{{credit.Name}}</td>
-                                            <td><a href="#"><span class="fa fa-trash"></span></a></td>
+                                        <tr ng-repeat="credit in GLOB.credits" ng-class="{'danger': credit.ForecastType == 'Fixed','success': credit.ForecastType == 'Average'}">
+                                            <td><h4>{{credit.Name}}</h4></td>
+                                            <td>
+                                                <form name="radio-form" class="form-check form-check-inline">
+                                                    <lable for="radio-fixed" class="form-check-label">
+                                                        <input id="radio-fixed" class="form-check-input" type="radio" ng-model="credit.ForecastType" name="forcastType" value="Fixed" />
+                                                        Fixed
+                                                    </lable>
+                                                    <lable for="radio-average" class="form-check-label">
+                                                        <input id="radio-average" class="form-check-input" type="radio" ng-model="credit.ForecastType" name="forcastType" value="Average" />
+                                                        Average
+                                                    </lable>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form class="input-group">
+                                                    <span class="input-group-addon">$</span>
+                                                    <input class="form-control" type="number" ng-disabled="credit.ForecastType != 'Fixed'" ng-model="credit.Predictions[credit.ForecastType]" />
+                                                    <span class="input-group-addon">.00</span>
+                                                </form>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -80,16 +139,7 @@
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-md-6 -->
-
-            </section>
-        </div>
-        <!-- ./general -->
-        <div class="row">
-            <section class="monthly-settings-group">
-                <h3>Monthly Settings</h3>
-                <hr />
-                <p ng-repeat="debit in GLOB.debits">{{debit}}</p>
-                <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="panel panel-red">
                         <div class="panel-heading">
                             Manage Expense Categories
@@ -102,30 +152,36 @@
                                         <tr>
                                             <th>Category</th>
                                             <th>Forcast Type <span class="fa fa-question-circle"></span></th>
-                                            <th>Value</th>
+                                            <th>Prediced Value</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="debit in GLOB.debits">
-                                            <td>{{debit.Name}}</td>
+                                        <tr ng-repeat="debit in GLOB.debits" ng-class="{'danger': debit.ForecastType == 'Fixed','success': debit.ForecastType == 'Average', 'warning': debit.ForecastType == 'Relative' }">
+                                            <td><h4>{{debit.Name}}</h4></td>
                                             <td>
-                                                <form class="form-check form-check-inline">
+                                                <form name="radio-form" class="form-check form-check-inline">
                                                     <lable for="radio-fixed" class="form-check-label">
-                                                        <input id="radio-fixed" class="form-check-input" type="radio" name="forcastType" value="0" checked />
+                                                        <input id="radio-fixed" class="form-check-input" type="radio" ng-model="debit.ForecastType" name="forcastType" value="Fixed"/>
                                                         Fixed
                                                     </lable>
                                                     <lable for="radio-average" class="form-check-label">
-                                                        <input id="radio-average" class="form-check-input" type="radio" name="forcastType" value="1" />
+                                                        <input id="radio-average" class="form-check-input" type="radio" ng-model="debit.ForecastType" name="forcastType" value="Average" />
                                                         Average
                                                     </lable>
                                                     <lable for="radio-relative" class="form-check-label">
-                                                        <input id="radio-relative" class="form-check-input" type="radio" name="forcastType" value="2" />
+                                                        <input id="radio-relative" class="form-check-input" type="radio" ng-model="debit.ForecastType" name="forcastType" value="Relative" />
                                                         Relative
                                                     </lable>
                                                 </form>
                                             </td>
-                                            <td><form><input type="number" /></form></td>
+                                            <td>
+                                                <form class="input-group">
+                                                    <span class="input-group-addon">$</span>
+                                                    <input class="form-control" type="number" ng-disabled="debit.ForecastType != 'Fixed'" ng-model="debit.Predictions[debit.ForecastType]" />
+                                                    <span class="input-group-addon">.00</span>
+                                                </form>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

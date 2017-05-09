@@ -73,6 +73,8 @@ namespace Goal.Controllers.ApiControllers
             }
 
             model.UserId = UserService.GetCurrentUserId();
+            model.ForecastType = "Fixed";
+            model.FixedPrediction = 20;
 
             int categoryId = LogService.InsertCategory(model);
 
