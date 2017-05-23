@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = "~/Views/Shared/blank-external.cshtml";
+}
+<div id="ex-login">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 body-content">
+                <div class="bar-accent">
+                    <h2>Login</h2>
+                    <h4>Connect to your account.</h4>
+                </div>
+                <div class="row">
+                    
+                    <div class="col-md-5 col-md-offset-1">
+                        <h3><strong>Don't have an accout?</strong></h3>
+                        <h4>
+                            @Html.ActionLink("Sign up for free!", "Register")
+                        </h4>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace Goal.Controllers
 {
     [Authorize]
-    public class GoalController: Controller
+    public class GoalController: BaseController
     {
         public ActionResult Index()
         {

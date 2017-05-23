@@ -220,6 +220,19 @@ namespace Goal.Services
             return !string.IsNullOrEmpty(GetCurrentUserId());
 
         }
+
+
+        // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        public static bool IsEmailVerified()
+        {
+            bool result = false;
+
+            IdentityUser user = GetCurrentUser();
+
+            result = user.EmailConfirmed;
+
+            return result;
+        }
     }
 }
 
