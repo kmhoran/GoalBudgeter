@@ -17,10 +17,13 @@
         // Methods
         vm.addCredit = _addCredit;
         vm.addDebit = _addDebit;
+        vm.deleteCategory = _deleteCategory;
 
         // Properties
         vm.creditToAdd = null;
         vm.debitToAdd = null;
+        vm.dec31 = new Date(new Date().getFullYear(), 11, 31);
+        
 
         // /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -64,10 +67,22 @@
 
         // .........................................................................................
 
+        function _deleteCategory(categoryId) {
+            if (confirm("Permanently delete this category?")) {
+                vm.$logHttpService.deleteCategory(categoryId)
+            .then(function () {
+                $rootScope.$emit("onToastrSuccess", "Category Removed Successfully!");
+                $rootScope.$emit("RefreshCategories");
+            }).catch(_showError);
+            }
+        }
+
+
+        // .........................................................................................
+
         function _showError(error) {
             console.log("Something went wrong: ", error);
         }
-
 
     }
 })();

@@ -1,0 +1,265 @@
+USE [GoalBudget]
+GO
+
+-- '4ce4c422-9a6d-49e5-a6cb-dc1f31cc3860' : TEST with test4@test.com
+
+-- 'e13ed830-b5ac-4c94-977c-fd4a2f26bc8b' : TEST with coffee@test.com
+
+-- 'YearOnly' : has thisYear0 instance, no months
+
+-- 'YearAndPrevMonths' : has thisYear0 instance, prevMonth0 
+
+-- 'YearAndMonth' : has thisYear0 instance, thisMonth0
+
+/*
+  @UserIs nvarchar(128)
+, @inputYearStartingAmount float
+, @YearGoal int = 999
+*/
+
+
+
+Declare @UserId nvarchar(128) = 'hasPreference'
+Declare @inputYearStartingAmount float = 100
+Declare @YearGoal int = 999
+
+DECLARE @jan1 date = CAST(DATEADD(yy, DATEDIFF(yy, 0, GETDATE()), 0) AS DATE)
+DECLARE @FirstOfMonth date = CAST(DATEADD(m, DATEDIFF(m, 0, GETDATE()), 0) AS DATE)
+DECLARE @YearStartingAmount float = (SELECT TOP(1) StartingAmount FROM dbo.Years WHERE UserId = @UserId AND StartingDate = @jan1);
+--DECLARE @thisYearId int = (SELECT [YearId] FROM dbo.Years Where StartingDate = @jan1)
+
+BEGIN TRANSACTION
+
+--? If this is First ever Year entry
+IF NOT EXISTS (SELECT YearId FROM [dbo].[Years] Where UserId = @UserId)
+
+    --> Initiate Year and Month
+    Exec dbo.Insert_FreshYearAndMonth @UserId, @inputYearStartingAmount, @YearGoal;
+
+    
+ELSE
+ --   IF NOT EXISTS (SELECT[YearId] FROM [dbo].[Years] WHERE UserId = @UserId and StartingDate = @jan1)
+	BEGIN
+
+	-- Grab values from most recent year
+	DECLARE @PrevYearStartingAmount float
+
+				SELECT 
+				   @YearStartingAmount = (prevMo.StartingAmount + (prevMo.GrossCredits - prevMo.GrossDebits))
+				  ,@MonthStartDate = CAST(DATEADD(month, 1, prevMo.StartingDate) AS DATE)
+
+				FROM dbo.Months prevMo
+                INNER JOIN(SELECT MonthId, MAX(StartingDate) AS MaxDate 
+			    FROM dbo.Months
+			    GROUP BY MonthId) maxMo
+			    ON prevMo.MonthId = maxMo.MonthId
+			    AND prevMo.StartingDate = maxMo.MaxDate
+			    WHERE prevMo.UserId = @UserId 
+
+	    
+	END
+   
+    --? If this year has no months
+    IF NOT EXISTS (SELECT [MonthId] FROM [dbo].[Months] Where UserId = @UserId AND CAST(DATEADD(yy, DATEDIFF(yy, 0, StartingDate), 0) AS DATE) = @jan1)
+	    
+		--> Initiate THIS Month (not Jan)
+        EXEC dbo.Insert_Month @UserId, @YearStartingAmount, 0, @FirstOfMonth;
+    
+	ELSE
+        --? Else this year has months but not this month
+		IF NOT EXISTS (SELECT [MonthId] FROM [dbo].[Months] Where UserId = @UserId AND StartingDate = @FirstOfMonth)
+			
+			--> Add month(s) up until now
+			While (MONTH(CAST(DATEADD(m, DATEDIFF(m, 0, GETDATE()), 0) AS DATE)) - MONTH((SELECT MAX(StartingDate) FROM dbo.Months WHERE UserId = @UserId))) > 0
+			BEGIN
+			    -- Grab values from most recent month
+				DECLARE @MonthStartingAmount float, @MonthStartDate date
+
+				SELECT 
+				   @MonthStartingAmount = (prevMo.StartingAmount + (prevMo.GrossCredits - prevMo.GrossDebits))
+				  ,@MonthStartDate = CAST(DATEADD(month, 1, prevMo.StartingDate) AS DATE)
+
+				FROM dbo.Months prevMo
+                INNER JOIN(SELECT MonthId, MAX(StartingDate) AS MaxDate 
+			    FROM dbo.Months
+			    GROUP BY MonthId) maxMo
+			    ON prevMo.MonthId = maxMo.MonthId
+			    AND prevMo.StartingDate = maxMo.MaxDate
+			    WHERE prevMo.UserId = @UserId 
+
+				EXEC dbo.Insert_Month @UserId, @MonthStartingAmount, @MonthStartDate
+			END
+
+			
+	    
+		--? Else If this month already exists
+		ELSE
+		  
+		  --> Do Nothing
+          PRINT 'Current Month Exists: No action taken.'
+
+IF @@ERROR <> 0
+BEGIN
+-- Rollback the transaction
+    ROLLBACK
+
+    -- Raise an error and return
+    RAISERROR ('Error in initiating Year/Month', 16, 1);
+    RETURN
+END
+
+COMMIT
+
+
+/*
+===================================================================================
+
+DECLARE @UserId nvarchar(128) = 'AddAMonth',
+@GoalType nvarchar(20) = 'Yearly'
+
+DECLARE @count int = 0,
+@month date = (SELECT MAX(StartingDate) FROM dbo.Months WHERE UserId = @UserId),
+@jan1 date = CAST(DATEADD(yy, DATEDIFF(yy, 0, GETDATE()), 0) AS DATE),
+@_mostRecentMonth date;
+
+/*
+--WHILE   < 3
+--BEGIN
+--   Print @count
+--   SET @count +=1;
+--END
+*/
+/* 
+DECLARE @month date = (SELECT MAX(StartingDate) FROM dbo.Months)
+IF (MONTH(CAST(DATEADD(m, DATEDIFF(m, 0, GETDATE()), 0) AS DATE)) - MONTH(@month)) = 0
+BEGIN
+Print 'success';
+END
+*/
+/*
+SET @_mostRecentMonth = (SELECT MAX(StartingDate) FROM dbo.Months WHERE UserId = @UserId)
+INSERT INTO dbo.Months
+(Precedent
+,UserId
+,StartingDate
+,GrossCredits
+,GrossDebits
+,StartingAmount
+,GoalType
+,FixedGoalAmount)
+SELECT 
+  prevMo.MonthId
+ ,@UserId
+ ,CAST(DATEADD(month, 1, @_mostRecentMonth) AS DATE)
+ ,0.00
+ ,0.00
+ ,(prevMo.StartingAmount + (prevMo.GrossCredits - prevMo.GrossDebits))
+ , @GoalType
+ , mo.FixedGoalAmount
+ FROM dbo.Months prevMo
+INNER JOIN(SELECT MonthId, MAX(StartingDate) AS MaxDate 
+			FROM dbo.Months
+			GROUP BY MonthId) maxMo
+			ON prevMo.MonthId = maxMo.MonthId
+			AND prevMo.StartingDate = maxMo.MaxDate
+			WHERE prevMo.UserId = @UserId
+*/
+SET @_mostRecentMonth = (SELECT MAX(StartingDate) FROM dbo.Months WHERE UserId = @UserId)
+PRINT CAST(DATEADD(month, 1, @_mostRecentMonth) AS DATE)
+
+
+SELECT prevMo.MonthId
+ ,@UserId AS UserId
+ ,CAST(DATEADD(month, 1, @_mostRecentMonth) AS DATE) as StartingDate
+ ,0.00 AS GrossCredits
+ ,0.00 As GrossDebits
+ ,(prevMo.StartingAmount + (prevMo.GrossCredits - prevMo.GrossDebits)) AS StartingAmount
+ , @GoalType AS GoalType
+ , prevMo.FixedGoalAmount
+
+ FROM dbo.Months prevMo
+INNER JOIN(SELECT MonthId, MAX(StartingDate) AS MaxDate 
+			FROM dbo.Months
+			GROUP BY MonthId) maxMo
+			ON prevMo.MonthId = maxMo.MonthId
+			AND prevMo.StartingDate = maxMo.MaxDate
+			WHERE prevMo.UserId = @UserId
+
+===================================================================================
+
+*/
+
+
+/*
+USE [GoalBudget]
+GO
+
+CREATE PROC dbo.Year_Insert_BlankYear
+
+ @PreviousYearId int
+,@UserId
+,@StartDate datetime
+,@StartingAmount float
+,@YearGoal
+
+
+-- Insert Year
+INSERT INTO [dbo].[Years]
+           (Precedent
+           ,UserId
+           ,StartingDate
+           ,StartingAmount
+           ,Goal)
+     VALUES
+           (@PreviousYearId
+           ,@UserId
+           --,CAST(DATEADD(yy, DATEDIFF(yy, 0, GETDATE()), 0) AS DATE)
+           ,@StartDate
+           ,@StartingAmount
+           ,@YearGoal)
+
+-- Insert January
+
+
+-- Insert 12 blank months
+DECLARE @monthCount int = 0, 
+      , @yearId int = 
+
+WHILE @monthCount > 12
+BEGIN
+
+EXEC dbo.Insert_Month @UserId, @StartingAmount
+
+END 
+
+
+
+*/
+
+-->| Month View |<
+/*
+CREATE VIEW dbo.CalculatedMonth
+AS
+
+
+SELECT
+ MonthId
+,Precedent
+,UserId
+,StartingDate
+,GrossCredits - GrossDebits AS Balance
+,(GrossCredits)
+,(GrossDebits)
+,StartingAmount
+,dbo.f_getMonthlyGoal(UserId) AS MonthlyGoal
+,MonthlyGoal - Balance AS LeftToSpend
+FROM [dbo].[Months] mo
+INNER JOIN dbo.Preferences pref
+On mo.UserId = pref.UserId
+
+
+*/
+
+
+
+

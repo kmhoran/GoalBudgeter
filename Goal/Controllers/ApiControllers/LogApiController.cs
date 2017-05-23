@@ -82,5 +82,51 @@ namespace Goal.Controllers.ApiControllers
 
             return Request.CreateResponse(HttpStatusCode.OK, response);
         }
+
+
+        // .........................................................................................
+
+        [Route("categories"), HttpPut]
+        public HttpResponseMessage UpdateCategories(CategoriesUpdateRequest model)
+        {
+            if (!UserService.IsLoggedIn())
+            {
+                HttpError error = new HttpError { Message = "Cannot process request for unauthenticated user." };
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, error);
+            }
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            bool isSuccess = LogService.UpdateCategoryCollection(model);
+
+            var response = new ItemResponse<bool> { Item = isSuccess };
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
+
+
+        // .........................................................................................
+
+        [Route("category"), HttpDelete]
+        public HttpResponseMessage DeleteCategories(int categoryId)
+        {
+            if (!UserService.IsLoggedIn())
+            {
+                HttpError error = new HttpError { Message = "Cannot process request for unauthenticated user." };
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, error);
+            }
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            bool isSuccess = LogService.DeleteCategory(categoryId);
+
+            var response = new ItemResponse<bool> { Item = isSuccess };
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
     }
 }

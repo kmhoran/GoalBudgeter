@@ -209,6 +209,84 @@ namespace Goal.Services
 
             return isSuccess;
         }
-    }
 
+
+        // .........................................................................................
+
+        public static bool UpdateCategory(CategoryDomain model)
+        {
+            bool isSuccess = false;
+
+            try
+            {
+                DataProvider.ExecuteNonQuery(GetConnection, "dbo.Update_Category",
+                    inputParamMapper:delegate( SqlParameterCollection paramCollection)
+                    {
+                        paramCollection.AddWithValue("@CategoryId", model.CategoryId);
+                        paramCollection.AddWithValue("@ForcastType", model.ForecastType);
+                        paramCollection.AddWithValue("@FixedPrediction", model.Predictions.Fixed);
+
+                        isSuccess = true;
+                    }
+                    );
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return isSuccess;   
+        }
+
+        
+
+        // .........................................................................................
+
+        public static bool UpdateCategoryCollection(CategoriesUpdateRequest model)
+        {
+            bool isSuccess = false;
+
+            foreach(CategoryDomain category in model.CategoryList)
+            {
+                try
+                {
+                    UpdateCategory(category);
+                }
+                catch(Exception e)
+                {
+                    throw e;
+                }
+            }
+
+            isSuccess = true;
+
+            return isSuccess;
+        }
+
+
+        // .........................................................................................
+
+        public static bool DeleteCategory(int categoryId)
+        {
+            bool isSuccess = false;
+
+            try
+            {
+                DataProvider.ExecuteNonQuery(GetConnection, "dbo.Delete_Category",
+                    inputParamMapper: delegate (SqlParameterCollection paramCollection)
+                    {
+                        paramCollection.AddWithValue("@CategoryId", categoryId);
+
+                        isSuccess = true;
+                    }
+                    );
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return isSuccess;
+        }
+    }
 }

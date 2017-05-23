@@ -30,8 +30,8 @@
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="credit in GLOB.credits">
-                                            <td>{{credit.Name}}</td>
-                                            <td><a href="#"><span class="fa fa-trash"></span></a></td>
+                                            <td><strong>{{credit.Name}}</strong></td>
+                                            <td><a ng-click="SetC.deleteCategory(credit.CategoryId)"><span class="fa fa-trash fa-2x"></span></a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -66,8 +66,8 @@
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="debit in GLOB.debits">
-                                            <td>{{debit.Name}}</td>
-                                            <td><a href="#"><span class="fa fa-trash"></span></a></td>
+                                            <td><strong>{{debit.Name}}</strong></td>
+                                            <td><a ng-click="SetC.deleteCategory(debit.CategoryId)"><span class="fa fa-trash fa-2x"></span></a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -88,11 +88,14 @@
             <section class="monthly-settings-group">
                 <h3>Monthly Settings</h3>
                 <hr />
-
+                <ul>
+                    <li>aim for yearly goal</li>
+                    <li>manual override</li>
+                </ul>
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="panel panel-green">
+                    <div id="manage-income-categories" class="panel panel-green">
                         <div class="panel-heading">
-                            Manage Income Categories
+                            Manage Income Forecasting
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -102,7 +105,7 @@
                                         <tr>
                                             <th>Category</th>
                                             <th>Forcast Type <span class="fa fa-question-circle"></span></th>
-                                            <th>Prediced Value</th>
+                                            <th>Forcast Value</th>
 
                                         </tr>
                                     </thead>
@@ -130,6 +133,16 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <!-- /.tbody -->
+                                    <tfoot>
+                                        <tr>
+                                            <td class="button-row" colspan="3">
+                                                <button id="save-credit-changes" class="btn btn-lg btn-success" ng-click="GLOB.updateCreditForecastSettings()">Save Changes</button>
+                                                <button class="btn btn-default btn-lg" ng-click="GLOB.getTransactionCategories()">Reset Values</button>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                    <!-- /.tfoot -->
                                 </table>
                             </div>
                             <!-- /.table-responsive -->
@@ -142,7 +155,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="panel panel-red">
                         <div class="panel-heading">
-                            Manage Expense Categories
+                            Manage Expense Forecasting
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -152,7 +165,7 @@
                                         <tr>
                                             <th>Category</th>
                                             <th>Forcast Type <span class="fa fa-question-circle"></span></th>
-                                            <th>Prediced Value</th>
+                                            <th>Forecast Value</th>
 
                                         </tr>
                                     </thead>
@@ -162,7 +175,7 @@
                                             <td>
                                                 <form name="radio-form" class="form-check form-check-inline">
                                                     <lable for="radio-fixed" class="form-check-label">
-                                                        <input id="radio-fixed" class="form-check-input" type="radio" ng-model="debit.ForecastType" name="forcastType" value="Fixed"/>
+                                                        <input id="radio-fixed" class="form-check-input" type="radio" ng-model="debit.ForecastType" name="forcastType" value="Fixed" />
                                                         Fixed
                                                     </lable>
                                                     <lable for="radio-average" class="form-check-label">
@@ -184,6 +197,16 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <!-- /.tbody -->
+                                    <tfoot>
+                                        <tr>
+                                            <td class="button-row" colspan="3">
+                                                <button id="save-debit-changes" class="btn btn-lg btn-success" ng-click="GLOB.updateDebitForecastSettings()">Save Changes</button>
+                                                <button class="btn btn-default btn-lg" ng-click="GLOB.getTransactionCategories()">Reset Values</button>
+                                             </td>
+                                        </tr>
+                                    </tfoot>
+                                    <!-- /.tfoot -->
                                 </table>
                             </div>
                             <!-- /.table-responsive -->
@@ -200,10 +223,26 @@
             <section id="yearly-settings-group">
                 <h3>Yearly Settings</h3>
                 <hr />
-                <ul>
-                    <li>Starting Amount</li>
-                    <li>Yearly Goal</li>
-                </ul>
+                <h4>Finish line: {{SetC.dec31 | date: 'MMMM d, y'}}</h4>
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        Manage Yearly Settings
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <ul>
+                            <li>starting amout</li>
+                            <li>goal</li>
+                        </ul>
+                    </div>
+                    <!-- /.pnael-body -->
+                    <div class="panel-footer">
+
+                    </div>
+                    <!-- /.panel-footer -->
+                </div>
+                <!-- /.panel-info -->
             </section>
         </div>
         <!-- ./year -->

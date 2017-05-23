@@ -196,6 +196,7 @@
     <Compile Include="Models\Domain\CategoryDomain.cs" />
     <Compile Include="Models\Domain\PredictionCollectionDomain.cs" />
     <Compile Include="Models\Requests\CategoryInsertRequest.cs" />
+    <Compile Include="Models\Requests\CategoriesUpdateRequest.cs" />
     <Compile Include="Models\Responses\BaseResponseModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Responses\ItemResponse.cs" />
@@ -254,6 +255,13 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Content\SASS\custom.scss" />
+    <Content Include="Scripts\bower_components\angular-bootstrap\.gitignore" />
+    <Content Include="Scripts\bower_components\angular-bootstrap\index.js" />
+    <Content Include="Scripts\bower_components\angular-bootstrap\ui-bootstrap-csp.css" />
+    <Content Include="Scripts\bower_components\angular-bootstrap\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\bower_components\angular-bootstrap\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\bower_components\angular-bootstrap\ui-bootstrap.js" />
+    <Content Include="Scripts\bower_components\angular-bootstrap\ui-bootstrap.min.js" />
     <Content Include="Scripts\bower_components\angular-chosen\angular-chosen.js" />
     <Content Include="Scripts\bower_components\angular-chosen\chosen-spinner.css" />
     <Content Include="Scripts\bower_components\angular-chosen\chosen.jquery.min.js" />
@@ -438,6 +446,11 @@
     <Content Include="Scripts\bower_components\angular-chosen\bower.json" />
     <Content Include="Scripts\bower_components\angular-chosen\README.md" />
     <Content Include="Scripts\bower_components\angular-chosen\src\angular-chosen.coffee" />
+    <Content Include="Scripts\bower_components\angular-bootstrap\.bower.json" />
+    <Content Include="Scripts\bower_components\angular-bootstrap\.npmignore" />
+    <Content Include="Scripts\bower_components\angular-bootstrap\bower.json" />
+    <Content Include="Scripts\bower_components\angular-bootstrap\package.json" />
+    <Content Include="Scripts\bower_components\angular-bootstrap\README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bower_components\angular\angular-csp.css" />
     <Content Include="Scripts\bower_components\angular\angular.js" />

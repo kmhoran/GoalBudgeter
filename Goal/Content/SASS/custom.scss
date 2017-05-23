@@ -54,6 +54,16 @@ input.big {
     }
 }
 
+input[type="radio"]{
+    cursor: pointer;
+    height: 1.5em;
+    width: 1.5em;
+    position:relative;
+    top:0.3em;
+}
+label p{
+    font-size: 1.5em;
+}
 /*splash*/
 .index-form .input-group {
     margin-bottom: 1em;
@@ -98,6 +108,11 @@ input.big {
 .add-category{
     margin-top: 0.7em;
 }
+.button-row button{
+    display: inline;
+    margin-right: 1em;
+}
+
 /*End BudgetSettings*/
 /*Authenticated layout*/
 .nav li #logoutForm {

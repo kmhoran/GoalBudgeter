@@ -10,10 +10,13 @@
         
         var baseUrl = "/api/log"
 
+        // Public Methods
         return {
             insertTransaction: _insertTransaction,
             getTransactionCategories: _getTransactionCategories,
-            insertTransactionCategory: _insertTransactionCategory
+            insertTransactionCategory: _insertTransactionCategory,
+            updateCategories: _updateCategories,
+            deleteCategory: _deleteCategory
         };
 
         // /////////////////////////////////////////////////////////////////////////////////////////
@@ -48,6 +51,34 @@
                 method: "POST",
                 url: baseUrl.concat("/categories"),
                 data: data
+            };
+
+            return $http(settings);
+        }
+
+
+        // .........................................................................................
+
+        function _updateCategories (data) {
+            // Data should come as an array of category objects
+
+            var settings = {
+                method: "PUT",
+                url: baseUrl.concat("/categories"),
+                data: data
+            };
+
+            return $http(settings);
+        }
+
+
+        // .........................................................................................
+
+        function _deleteCategory(categoryId) {
+            var settings = {
+                method: "DELETE",
+                url: baseUrl.concat("/category"),
+                data: categoryId
             };
 
             return $http(settings);

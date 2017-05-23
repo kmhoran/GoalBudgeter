@@ -34,8 +34,15 @@
         };
 
         vm.credits = null;
+        
         vm.debits = null;
         vm.test = "TEST"
+
+        // Methods 
+        vm.updateCreditForecastSettings = _updateCreditForecastSettings;
+        vm.updateDebitForecastSettings = _updateDebitForecastSettings;
+        vm.getTransactionCategories = _getTransactionCategories;
+
         // Startup Functions
         _getTransactionCategories()
 
@@ -68,6 +75,33 @@
 
             }).catch(_showError);
         }
+
+
+        // .........................................................................................
+
+        function _updateCreditForecastSettings() {
+            var payload = {CategoryList: vm.credits};
+            $logHttpService.updateCategories(payload)
+            .then(function updateCreditSuccess() {
+                var messageIn = "Income Forecasting Updated Successfully!";
+                _onToastrSuccess(messageIn)
+                _getTransactionCategories();
+            }).catch(_showError)
+        }
+
+
+        // .........................................................................................
+
+        function _updateDebitForecastSettings() {
+            var payload = { CategoryList: vm.debits };
+            $logHttpService.updateCategories(payload)
+            .then(function updatedebitSuccess() {
+                var messageIn = "Expese Forecasting Updated Successfully!";
+                _onToastrSuccess(messageIn)
+                _getTransactionCategories();
+            }).catch(_showError)
+        }
+
 
 
         // .........................................................................................

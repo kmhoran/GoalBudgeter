@@ -23,12 +23,13 @@
     <script src="~/Scripts/bower_components/raphael/raphael.min.js"></script>
     <script src="~/Scripts/bower_components/morris.js/morris.js"></script>
     <script src="~/Scripts/bower_components/angular-morris/build/module/angular-morris/angular-morris.min.js"></script>
+    <script src="~/Scripts/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script>
         var APPNAME = "GoalApp";
 
         (function () {
             "use strict"
-            angular.module(APPNAME, ['ngRoute', 'angular-chosen', 'angular.morris']);
+            angular.module(APPNAME, ['ngRoute', 'angular-chosen', 'angular.morris', 'ui.bootstrap']);
         })();
     </script>
     <!-- Routing -->
