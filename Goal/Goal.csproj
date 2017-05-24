@@ -195,6 +195,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Domain\CategoryCollectionDomain.cs" />
     <Compile Include="Models\Domain\CategoryDomain.cs" />
+    <Compile Include="Models\Domain\EmailDomain.cs" />
     <Compile Include="Models\Domain\PredictionCollectionDomain.cs" />
     <Compile Include="Models\Requests\CategoryInsertRequest.cs" />
     <Compile Include="Models\Requests\CategoriesUpdateRequest.cs" />
@@ -207,7 +208,9 @@
     <Compile Include="Models\Responses\SuccessResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\LogService.cs" />
+    <Compile Include="Services\TokenService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -231,6 +234,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\App\Config\pageRouting.js" />
+    <Content Include="Scripts\App\Controllers\externalController.js" />
     <Content Include="Scripts\App\Controllers\globalController.js" />
     <Content Include="Scripts\App\Controllers\inputDebitController.js" />
     <Content Include="Scripts\App\Controllers\inputCreditController.js" />
@@ -539,6 +543,7 @@
     <Content Include="Scripts\Theme\vendor\raphael.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\toastrOptions.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -584,6 +589,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_ExternalIconPartial.cshtml" />
     <Content Include="Views\Home\InvalidEmail.cshtml" />
+    <Content Include="Views\Home\EmailSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

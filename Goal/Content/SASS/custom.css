@@ -20,6 +20,9 @@ input.big {
 .orange {
   color: #FFA339; }
 
+.inline-block {
+  display: inline-block !important; }
+
 .panel .panel-heading {
   font-weight: 700; }
 .panel .panel-body.md {
