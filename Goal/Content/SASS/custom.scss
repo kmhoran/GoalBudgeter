@@ -4,6 +4,7 @@ $danger: #D9534F;
 $danger-light: #FC827F;
 $green: #2ECC73;
 $orange: #FFA339;
+$rust: #D72D00;
 
 $white: #ffffff;
 $exLandingImage: url(../Images/pexels-photo-89505-ferris-wheel-min.jpg);
@@ -37,6 +38,9 @@ input.big {
 
 .orange {
     color: $orange;
+}
+.red{
+    color: $rust;
 }
 .inline-block{
     display: inline-block !important;

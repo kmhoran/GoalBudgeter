@@ -23,8 +23,8 @@ namespace Goal.Services
 
             MailAddress userEmail = new MailAddress(user.Email);
             // This address to be updated for production
-            string verificationAddress = String.Concat("http://localhost:55960/Home/", token);
-            string body = "<p>Hi {0},</p><p>Welcome to Goal Budget! To access your account follow the link below:</p><a href='{1}'>Click me!</a>";
+            string verificationAddress = String.Concat("http://localhost:55960/Home/VerifyAccount/?identity=",user.Id,"&key=", token);
+            string body = "<p>Hi {0},</p><p>Welcome to Goal Budget! To access your account, please follow the link below:</p><a href='{1}'>{1}</a>";
 
             var email = new MailMessage();
             email.To.Add(userEmail);

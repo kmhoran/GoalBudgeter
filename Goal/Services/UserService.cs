@@ -233,6 +233,24 @@ namespace Goal.Services
 
             return result;
         }
+
+
+        // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        public static void ConfirmUserEmail(string userId)
+        {
+            try
+            {
+                DataProvider.ExecuteNonQuery(GetConnection, "dbo.AspNetUsers_ConfirmEmail",
+                    inputParamMapper: delegate(SqlParameterCollection paramCollection)
+                    {
+                        paramCollection.AddWithValue("@UserId", userId);
+                    });
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
 

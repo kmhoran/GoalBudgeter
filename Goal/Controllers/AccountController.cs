@@ -165,12 +165,14 @@ namespace Goal.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                    Guid token = TokenService.CreateToken(user.Id);
+
+                    await Services.EmailService.SendEmailConfirmationLetter(user, token);
+
+                    //LogService.InsertDefaultCategories(user.Id);
 
 
-                    LogService.InsertDefaultCategories(user.Id);
-
-
-                    return RedirectToAction("Index", "Goal");
+                    return RedirectToAction("EmailSent", "Home");
                 }
                 AddErrors(result);
             }

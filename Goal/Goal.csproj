@@ -196,6 +196,7 @@
     <Compile Include="Models\Domain\CategoryCollectionDomain.cs" />
     <Compile Include="Models\Domain\CategoryDomain.cs" />
     <Compile Include="Models\Domain\EmailDomain.cs" />
+    <Compile Include="Models\ViewModels\ErrorMessageVM.cs" />
     <Compile Include="Models\Domain\PredictionCollectionDomain.cs" />
     <Compile Include="Models\Requests\CategoryInsertRequest.cs" />
     <Compile Include="Models\Requests\CategoriesUpdateRequest.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\TokenService.cs" />
+    <Compile Include="Services\UserAccountService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -590,6 +592,7 @@
     <Content Include="Views\Shared\_ExternalIconPartial.cshtml" />
     <Content Include="Views\Home\InvalidEmail.cshtml" />
     <Content Include="Views\Home\EmailSent.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

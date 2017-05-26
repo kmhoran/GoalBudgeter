@@ -1,4 +1,6 @@
 ﻿using Goal.Models;
+using Goal.Models.Domain;
+using Goal.Models.ViewModels;
 using Goal.Services;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -34,12 +36,41 @@ namespace Goal.Controllers
             return View();
         }
 
+
+        public ActionResult VerifyAccount([FromUri] string identity, Guid key)
+        {
+            if(TokenService.IsValidToken(identity,key))
+            {
+                UserService.ConfirmUserEmail(identity);
+
+                return RedirectToAction("Index", "Goal");
+            }
+            else
+            {
+                var error = new ErrorMessageVM { Code = 498, Message = "Invalid Token" };
+
+                return RedirectToAction("Error", "Home", error);
+            }
+        }
+
+        public ActionResult Error(ErrorMessageVM error)
+        {
+            if (error == null)
+            {
+                error = new ErrorMessageVM { Code = 0, Message = "Woops! Something went wrong." };
+            }
+
+            return View(error);
+        }
+
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
+
 
         public ActionResult Contact()
         {

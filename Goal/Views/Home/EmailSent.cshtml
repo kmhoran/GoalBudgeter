@@ -8,15 +8,18 @@
         <div class="row">
             <div class="col-lg-12 body-content">
                 <div class="bar-accent">
-                    <span class="fa fa-paper-plane fa-4x inline-block"></span>
-                    <h2 class="inline-block">A confirmation is on it's way!</h2>
+                    <span class="fa fa-paper-plane fa-3x inline-block"></span>
+                    <h2 class="inline-block">A confirmation is on its way!</h2>
                     <h4>Please check your inbox to verify your account and start using your services.</h4>
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <br />
-                        <p><strong>Haven't recieved anything?</strong></p>
-                        <button class="btn btn-success">Resend email confimation</button>
+                        <p><strong>Haven't received anything?</strong></p>
+                        @using (Html.BeginForm("SendEmail", "Home"))
+                        {
+                        <button type="submit" class="btn btn-success">Resend email confimation</button>
+                        }
                         <br />
                     </div>
                     <div class="col-md-5 col-md-offset-1 col-sm-12">
@@ -36,5 +39,3 @@
     <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
-
-

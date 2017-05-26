@@ -37,5 +37,35 @@ namespace Goal.Services
 
             return token;
         }
+
+
+        public static bool IsValidToken(string userId, Guid token)
+        {
+            bool isValid = false;
+
+            try
+            {
+                DataProvider.ExecuteNonQuery(GetConnection, "dbo.Token_Validate_ByUserId",
+                    inputParamMapper: delegate (SqlParameterCollection paramCollection)
+                    {
+                        paramCollection.AddWithValue("@UserId", userId);
+                        paramCollection.AddWithValue("@Token", token);
+
+                        SqlParameter p = new SqlParameter("@isValid", System.Data.SqlDbType.Bit);
+                        p.Direction = System.Data.ParameterDirection.Output;
+
+                        paramCollection.Add(p);
+
+                    }, returnParameters: delegate (SqlParameterCollection param)
+                    {
+                        bool.TryParse(param["@isValid"].Value.ToString(), out isValid);
+                    });
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+            return isValid;
+        }
     }
 }
