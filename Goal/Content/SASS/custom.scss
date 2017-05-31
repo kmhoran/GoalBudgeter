@@ -15,6 +15,7 @@ $exLandingImage: url(../Images/pexels-photo-89505-ferris-wheel-min.jpg);
 body {
     .body-content {
         margin-top: 2em;
+        font-family: "Merriweather", sans-serif;
     }
 
     #top-accent {
@@ -31,6 +32,10 @@ body {
     padding-left: 1em;
 }
 
+.cursor-pointer{
+    cursor: pointer;
+}
+
 input.big {
     height: 45px;
     font-size: 15pt;
@@ -39,12 +44,15 @@ input.big {
 .orange {
     color: $orange;
 }
-.red{
+
+.red {
     color: $rust;
 }
-.inline-block{
+
+.inline-block {
     display: inline-block !important;
 }
+
 .panel {
 
     .panel-heading {
@@ -55,19 +63,20 @@ input.big {
         max-height: 25em;
     }
 
-    .panel-scroll{
+    .panel-scroll {
         overflow-y: scroll;
     }
 }
 
-input[type="radio"]{
+input[type="radio"] {
     cursor: pointer;
     height: 1.5em;
     width: 1.5em;
-    position:relative;
-    top:0.3em;
+    position: relative;
+    top: 0.3em;
 }
-label p{
+
+label p {
     font-size: 1.5em;
 }
 /*splash*/
@@ -110,11 +119,29 @@ label p{
     }
 }
 /*End splash*/
+/*New User Modal*/
+.modal-content {
+    .modal-success {
+        background-color: $green;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    .modal-title{
+        font-weight: 600;
+    }
+    .modal-body p {
+        font-size: 1.3em;
+        color: $black;
+        font-weight: 700;
+    }
+}
+/*End New User Modal*/
 /*Budget Settings*/
-.add-category{
+.add-category {
     margin-top: 0.7em;
 }
-.button-row button{
+
+.button-row button {
     display: inline;
     margin-right: 1em;
 }

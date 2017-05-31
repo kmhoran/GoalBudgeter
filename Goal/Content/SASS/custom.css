@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Biryani");
 @import url("https://fonts.googleapis.com/css?family=Merriweather");
 body .body-content {
-  margin-top: 2em; }
+  margin-top: 2em;
+  font-family: "Merriweather", sans-serif; }
 body #top-accent {
   background-color: #2ECC73;
   top: 10em;
@@ -13,12 +14,18 @@ body #top-accent {
   border-left: 5px solid #2ECC73;
   padding-left: 1em; }
 
+.cursor-pointer {
+  cursor: pointer; }
+
 input.big {
   height: 45px;
   font-size: 15pt; }
 
 .orange {
   color: #FFA339; }
+
+.red {
+  color: #D72D00; }
 
 .inline-block {
   display: inline-block !important; }
@@ -69,6 +76,19 @@ label p {
     color: #ffffff; }
 
 /*End splash*/
+/*New User Modal*/
+.modal-content .modal-success {
+  background-color: #2ECC73;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px; }
+.modal-content .modal-title {
+  font-weight: 600; }
+.modal-content .modal-body p {
+  font-size: 1.3em;
+  color: #333;
+  font-weight: 700; }
+
+/*End New User Modal*/
 /*Budget Settings*/
 .add-category {
   margin-top: 0.7em; }

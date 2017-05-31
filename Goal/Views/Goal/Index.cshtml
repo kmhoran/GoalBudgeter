@@ -1,4 +1,7 @@
 ﻿@* Goal/Index *@
+
+@model Goal.Models.ViewModels.BaseViewModel
+
 @{
     Layout = "~/Views/Shared/blank.cshtml";
 
@@ -9,6 +12,11 @@
     <link href="~/Content/Toastr/toastr.css" rel="stylesheet" />
     <!-- Morris Graph -->
     <link href="~/Content/Theme/Vendor/morris.css" rel="stylesheet" />
+}
+
+@if(Model.LogStatus == Goal.Enums.LogStatusType.NewUser)
+{
+    <div ng-controller="newUserController as nUsrC"></div>
 }
 
 <div ng-view></div>
@@ -47,9 +55,11 @@
     <script src="~/Scripts/App/Controllers/monthPageController.js"></script>
     <script src="~/Scripts/App/Controllers/yearPageController.js"></script>
     <script src="~/Scripts/App/Controllers/wishlistPageController.js"></script>
-    <!-- Morris Charts -->
-    @*<script src="~/Scripts/Theme/vendor/raphael.min.js"></script>
-        <script src="~/Scripts/Theme/vendor/morris.js"></script>
-        <script src="~/Scripts/Theme/vendor/morris-data.js"></script>*@
+    
+    @if(Model.LogStatus == Goal.Enums.LogStatusType.NewUser)
+    {
+        <script src="~/Scripts/App/Controllers/NewUserModalController.js"></script>
+        <script src="~/Scripts/App/Controllers/NewUserController.js"></script>
+    }
 
 }
