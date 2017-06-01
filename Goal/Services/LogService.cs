@@ -288,5 +288,65 @@ namespace Goal.Services
 
             return isSuccess;
         }
+
+
+        // .........................................................................................
+
+        public static LogStatusType GetLogStatus(string userId)
+        {
+            LogStatusType logStatus = new LogStatusType();
+
+            try
+            {
+                DataProvider.ExecuteNonQuery(GetConnection, "dbo.LogStatus_GetStatus",
+                    inputParamMapper: delegate (SqlParameterCollection paramCollection)
+                    {
+                        paramCollection.AddWithValue("@UserId", userId);
+
+                        var p = new SqlParameter("@LogStatus", System.Data.SqlDbType.Int);
+                        p.Direction = System.Data.ParameterDirection.Output;
+
+                        paramCollection.Add(p);
+                    },
+                    returnParameters: delegate (SqlParameterCollection param)
+                    {
+                        LogStatusType.TryParse(param["@LogStatus"].Value.ToString(), out logStatus);
+                    });
+
+            
+            }
+            catch
+            {
+                logStatus = LogStatusType.Error;
+            }
+
+            return logStatus;
+        }
+
+        // .........................................................................................
+
+        public static bool InitializeUserLog(NewUserLogInsertRequest model)
+        {
+            bool isSuccess = false;
+            try
+            {
+                DataProvider.ExecuteNonQuery(GetConnection, "dbo.Insert_FreshYearAndMonth",
+                    inputParamMapper: delegate(SqlParameterCollection paramCollection)
+                    {
+                        paramCollection.AddWithValue("@UserId", model.UserId);
+                        paramCollection.AddWithValue("@StartingDate", model.StartDate);
+                        paramCollection.AddWithValue("@StartingAmount", model.StartingAmount);
+                        paramCollection.AddWithValue("@YearGoal", model.GoalAmount);
+
+                        isSuccess = true;
+                    });
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+
+            return isSuccess;
+        }
     }
 }

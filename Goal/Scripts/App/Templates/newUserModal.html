@@ -1,0 +1,54 @@
+﻿<!-- New User Modal -->
+<!-- newUserModalController as nUsrMC -->
+<!--<div class="modal-header modal-success">
+    <h3 class="modal-title">Let's talk about your savings goal</h3>
+</div>-->
+<!-- Body-->
+<form name="newUserForm" ng-submit="nUsrMC.submitForm(newUserForm.$valid)">
+    <div class="modal-body">
+
+        <h3 class="modal-title">Let's talk about your savings goal</h3>
+        <br />
+        <p>How much do you already have saved? <span id="starting-amount-help" class="fa fa-question-circle cursor-pointer"></span></p>
+        <div id="starting-amount-info" class="info-box" hidden>Think bank accounts, and cash on hand. Try to be as accurate as you can, but don't sweat it; you can update this value later.</div>
+        <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input type="number" class="form-control" min="0" step="0.01" ng-model="nUsrMC.preferences.startingAmount" placeholder="20.00" required />
+        </div>
+        <hr />
+        <br />
+        <p>How much do you want to have by the New Year? <span id="goal-amount-help" class="fa fa-question-circle cursor-pointer"></span></p>
+        <div id="goal-amount-info" class="info-box" hidden>How much money do you want in the bank before this coming January 1st? ...Hopefully it's more than you have now.</div>
+        <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input type="number" class="form-control" min="0" ng-model="nUsrMC.preferences.goalAmount" placeholder="20" required />
+            <div class="input-group-addon">.00</div>
+        </div>
+
+
+    </div>
+    <!-- End Body -->
+
+    <div class="modal-footer">
+        <input class="btn btn-lg btn-primary" type="submit" ng-disabled="newUserForm.$invalid" value="Confirm"/>
+    </div>
+</form>
+<!-- End New User Modal -->
+
+<script>
+    $(document).ready(function () {
+
+        // Tool tips
+        $('#starting-amount-help').on('mouseenter', function () {
+            $('#starting-amount-info').stop(true).slideDown('fast');
+        }).on('mouseleave', function () {
+            $('#starting-amount-info').stop(true).slideUp('fast');
+        });
+
+        $('#goal-amount-help').on('mouseenter', function () {
+            $('#goal-amount-info').stop(true).slideDown('fast');
+        }).on('mouseleave', function () {
+            $('#goal-amount-info').stop(true).slideUp('fast');
+        });
+    });
+</script>
