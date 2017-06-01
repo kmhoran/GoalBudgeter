@@ -4,17 +4,18 @@
     angular.module(APPNAME)
     .controller("newUserController", NewUserController);
 
-    NewUserController.$inject = ['$scope', '$uibModal'];
+    NewUserController.$inject = ['$scope', '$rootScope', '$uibModal', '$logHttpService'];
 
-    function NewUserController($scope, $uibModal) {
+    function NewUserController($scope, $rootScope, $uibModal, $logHttpService) {
         // Injection
         var vm = this;
         vm.$scope = $scope;
+        vm.$rootScope = $rootScope;
         vm.$uibModal = $uibModal;
+        vm.$logHttpService = $logHttpService;
 
 
         // Startup Functions
-        console.log("newUserControllerConnected");
         _openNewUserModal();
 
         // /////////////////////////////////////////////////////////////////////////////////////////
@@ -30,12 +31,21 @@
                 resolve: {}
             });
 
-            //  when the modal closes it returns a promise
             modalInstance.result.then(function (userPreferences) {
-                    //  if the user closed the modal by clicking Save  
-            }, function () {
-                console.log('Modal dismissed at: ' + new Date());   //  if the user closed the modal by clicking cancel
+
+                vm.$logHttpService.initializeUserLog(userPreferences)
+                .then(function displaydata(data) {
+                    console.log("http data: ", data)
+                }).catch(_showError);
             });
         }
+
+
+        // .........................................................................................
+
+        function _showError(error) {
+            console.log("Something went wrong: ", error);
+        }
+
     }
 })();

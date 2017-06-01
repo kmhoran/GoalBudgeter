@@ -128,5 +128,29 @@ namespace Goal.Controllers.ApiControllers
 
             return Request.CreateResponse(HttpStatusCode.OK, response);
         }
+
+
+        [Route("initializeUserLog"), HttpPost]
+        public HttpResponseMessage InsertNewUserLog(NewUserLogInsertRequest model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            model.UserId = UserService.GetCurrentUserId();
+            model.StartDate = DateTime.Today;
+
+            bool isSuccess = LogService.InitializeUserLog(model);
+
+            if (isSuccess)
+            {
+                isSuccess = LogService.InsertDefaultCategories(model.UserId);
+            }
+
+            var response = new ItemResponse<bool> { Item = isSuccess };
+
+            return Request.CreateResponse(HttpStatusCode.OK, response);
+        }
     }
 }

@@ -322,5 +322,31 @@ namespace Goal.Services
 
             return logStatus;
         }
+
+        // .........................................................................................
+
+        public static bool InitializeUserLog(NewUserLogInsertRequest model)
+        {
+            bool isSuccess = false;
+            try
+            {
+                DataProvider.ExecuteNonQuery(GetConnection, "dbo.Insert_FreshYearAndMonth",
+                    inputParamMapper: delegate(SqlParameterCollection paramCollection)
+                    {
+                        paramCollection.AddWithValue("@UserId", model.UserId);
+                        paramCollection.AddWithValue("@StartingDate", model.StartDate);
+                        paramCollection.AddWithValue("@StartingAmount", model.StartingAmount);
+                        paramCollection.AddWithValue("@YearGoal", model.GoalAmount);
+
+                        isSuccess = true;
+                    });
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+
+            return isSuccess;
+        }
     }
 }

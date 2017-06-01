@@ -18,18 +18,20 @@
 
         // Properties
         vm.preferences = {
-            startingAmount: 0.00,
-            goalAmount: 0
+            startingAmount: null,
+            goalAmount: null
         };
 
         // Methods
-        vm.confirm = _confirm;
+        vm.submitForm = _submitForm;
         //vm.cancel = _cancel;
 
         // /////////////////////////////////////////////////////////////////////////////////////////
 
-        function _confirm() {
-            vm.$uibModalInstance.close(vm.preferences);
+        function _submitForm(isValid) {
+            if (isValid) {
+                vm.$uibModalInstance.close(vm.preferences);
+            }
         };
 
 

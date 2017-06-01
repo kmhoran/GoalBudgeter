@@ -16,7 +16,8 @@
             getTransactionCategories: _getTransactionCategories,
             insertTransactionCategory: _insertTransactionCategory,
             updateCategories: _updateCategories,
-            deleteCategory: _deleteCategory
+            deleteCategory: _deleteCategory,
+            initializeUserLog: _initializeUserLog
         };
 
         // /////////////////////////////////////////////////////////////////////////////////////////
@@ -79,6 +80,19 @@
                 method: "DELETE",
                 url: baseUrl.concat("/category"),
                 data: categoryId
+            };
+
+            return $http(settings);
+        }
+
+
+        // .........................................................................................
+
+        function _initializeUserLog(data) {
+            var settings = {
+                method: "POST",
+                url: baseUrl.concat("/initializeUserLog"),
+                data: data
             };
 
             return $http(settings);

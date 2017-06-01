@@ -1,5 +1,6 @@
 ﻿$black: #333;
-$blue: 3290BE;
+$blue: #3290BE;
+$dark-blue: #065E88;
 $danger: #D9534F;
 $danger-light: #FC827F;
 $green: #2ECC73;
@@ -15,7 +16,7 @@ $exLandingImage: url(../Images/pexels-photo-89505-ferris-wheel-min.jpg);
 body {
     .body-content {
         margin-top: 2em;
-        font-family: "Merriweather", sans-serif;
+        font-family: "Biryani", sans-serif;
     }
 
     #top-accent {
@@ -128,12 +129,42 @@ label p {
     }
     .modal-title{
         font-weight: 600;
+        margin-bottom: 1em;
     }
     .modal-body p {
         font-size: 1.3em;
         color: $black;
         font-weight: 700;
     }
+    .input-group{
+        position: relative;
+    }
+    .info-box{
+        /*position: absolute;
+        top: -180%;
+        left: 25em;*/
+        padding: 0.3em;
+        border: 2px solid $dark-blue;
+        border-radius: 5px;
+        box-shadow: 1px 1px 5px #888;
+        color: $white;
+        font-size: 0.9em;
+        font-weight: 600;
+        background-color: $blue;
+        margin-bottom: 0.5em;
+        
+
+        /*display: none;*/
+    }
+
+    .fa-question-circle{
+        font-size: 1.3em;
+    }
+
+    .fa-question-circle:hover{
+        color: $blue;
+    }
+
 }
 /*End New User Modal*/
 /*Budget Settings*/

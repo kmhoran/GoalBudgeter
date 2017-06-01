@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css?family=Merriweather");
 body .body-content {
   margin-top: 2em;
-  font-family: "Merriweather", sans-serif; }
+  font-family: "Biryani", sans-serif; }
 body #top-accent {
   background-color: #2ECC73;
   top: 10em;
@@ -82,11 +82,32 @@ label p {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px; }
 .modal-content .modal-title {
-  font-weight: 600; }
+  font-weight: 600;
+  margin-bottom: 1em; }
 .modal-content .modal-body p {
   font-size: 1.3em;
   color: #333;
   font-weight: 700; }
+.modal-content .input-group {
+  position: relative; }
+.modal-content .info-box {
+  /*position: absolute;
+  top: -180%;
+  left: 25em;*/
+  padding: 0.3em;
+  border: 2px solid #065E88;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px #888;
+  color: #ffffff;
+  font-size: 0.9em;
+  font-weight: 600;
+  background-color: #3290BE;
+  margin-bottom: 0.5em;
+  /*display: none;*/ }
+.modal-content .fa-question-circle {
+  font-size: 1.3em; }
+.modal-content .fa-question-circle:hover {
+  color: #3290BE; }
 
 /*End New User Modal*/
 /*Budget Settings*/
