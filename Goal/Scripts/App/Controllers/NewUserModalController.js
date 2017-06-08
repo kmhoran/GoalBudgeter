@@ -17,21 +17,37 @@
         vm.$uibModalInstance = $uibModalInstance;
 
         // Properties
+        vm.partOne = true;
+
         vm.preferences = {
             startingAmount: null,
-            goalAmount: null
+            goalAmount: null,
+            manualBudget: null,
+            predictedIncome: null
         };
 
         // Methods
         vm.submitForm = _submitForm;
+        vm.toggleForm = _toggleForm;
         //vm.cancel = _cancel;
 
         // /////////////////////////////////////////////////////////////////////////////////////////
 
-        function _submitForm(isValid) {
-            if (isValid) {
-                vm.$uibModalInstance.close(vm.preferences);
+        function _toggleForm() {
+            if (vm.partOne) {
+                vm.partOne = false;
+            } else {
+                vm.partOne = true;
             }
+        }
+
+        // .........................................................................................
+
+        function _submitForm() {
+         
+                //console.log("preferences: ",vm.preferences);
+               vm.$uibModalInstance.close(vm.preferences);
+          
         };
 
 

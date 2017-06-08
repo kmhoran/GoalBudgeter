@@ -33,10 +33,12 @@
 
             modalInstance.result.then(function (userPreferences) {
 
-                vm.$logHttpService.initializeUserLog(userPreferences)
-                .then(function displaydata(data) {
-                    console.log("http data: ", data)
-                }).catch(_showError);
+                console.log("your preferences: ", userPreferences);
+
+                //vm.$logHttpService.initializeUserLog(userPreferences)
+                //.then(function displaydata(data) {
+                //    console.log("http data: ", data)
+                //}).catch(_showError);
             });
         }
 

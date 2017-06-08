@@ -16,7 +16,7 @@ $exLandingImage: url(../Images/pexels-photo-89505-ferris-wheel-min.jpg);
 body {
     .body-content {
         margin-top: 2em;
-        font-family: "Biryani", sans-serif;
+        /*font-family: "Biryani", sans-serif;*/
     }
 
     #top-accent {
@@ -33,7 +33,7 @@ body {
     padding-left: 1em;
 }
 
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer;
 }
 
@@ -80,6 +80,10 @@ input[type="radio"] {
 label p {
     font-size: 1.5em;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}
 /*splash*/
 .index-form .input-group {
     margin-bottom: 1em;
@@ -119,6 +123,10 @@ label p {
         color: $white;
     }
 }
+
+.btn {
+    border-radius: 99em;
+}
 /*End splash*/
 /*New User Modal*/
 .modal-content {
@@ -127,19 +135,28 @@ label p {
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
-    .modal-title{
+
+    .modal-title {
         font-weight: 600;
         margin-bottom: 1em;
     }
+
     .modal-body p {
         font-size: 1.3em;
         color: $black;
         font-weight: 700;
     }
-    .input-group{
+
+    .modal-body p.pretext{
+        font-size: 1em;
+        color: $blue;
+    }
+
+    .input-group {
         position: relative;
     }
-    .info-box{
+
+    .info-box {
         /*position: absolute;
         top: -180%;
         left: 25em;*/
@@ -152,19 +169,35 @@ label p {
         font-weight: 600;
         background-color: $blue;
         margin-bottom: 0.5em;
-        
-
         /*display: none;*/
     }
 
-    .fa-question-circle{
+    .fa-question-circle {
         font-size: 1.3em;
     }
 
-    .fa-question-circle:hover{
+    .fa-question-circle:hover {
         color: $blue;
     }
 
+    .step-markers {
+        text-align: center;
+        position: relative;
+        top: 1em;
+        color: $blue;
+    }
+
+    .step-marker .fa {
+        
+        /*font-size: 1.3em;*/
+        margin: 0 0.5em;
+    }
+    .modal-body p.page-break{
+        color: $blue;
+        margin: 0.5em auto;
+        text-align: center;
+        font-size: 1.7em !important;
+    }
 }
 /*End New User Modal*/
 /*Budget Settings*/
@@ -175,6 +208,14 @@ label p {
 .button-row button {
     display: inline;
     margin-right: 1em;
+}
+
+.form-check.form-check-inline {
+    margin-bottom: 1em;
+
+    .form-check-label {
+        margin-right: 1em;
+    }
 }
 
 /*End BudgetSettings*/

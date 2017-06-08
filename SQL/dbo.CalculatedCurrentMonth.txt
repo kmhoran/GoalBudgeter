@@ -1,0 +1,42 @@
+-- 06/04/17
+
+use GoalBudget
+GO
+
+
+--DECLARE @monthStart date = 
+
+Alter View dbo.CalculatedCurrentMonth
+
+AS
+(
+SELECT        
+	Y.YearId AS yId,
+	Y.StartingDate AS yStartingDate,
+	Y.StartingAmount AS yStartingAmount,
+    Y.Goal AS yGoal,
+	mo.StartingAmount + (mo.GrossCredits - mo.GrossDebits) As Balance,
+    (mo.StartingAmount + (mo.GrossCredits - mo.GrossDebits)) - Y.StartingAmount As ySaved,
+    Y.Goal - (mo.StartingAmount + (mo.GrossCredits - mo.GrossDebits)) AS yAmountLeftToSave,
+	mo.MonthId AS mId, 
+	mo.StartingDate AS mStartingDate, 
+	mo.GrossCredits - mo.GrossDebits AS mSaved, 
+	mo.GrossCredits AS mGrossCredits, 
+	mo.GrossDebits AS mGrossDebits, 
+	mo.StartingAmount AS mStartingAmount, 
+	pref.preferenceId AS pId,
+	pref.MonthlyGoalType AS pGoalType,
+	pref.MonthlyFixedGoal AS pFixedMonthGoal,
+	pref.MonthlyFixedGoal + (mo.GrossDebits - mo.GrossCredits) AS mToReachFixedMonthGoal,
+	dbo.f_getMonthlyGoal(mo.UserId) AS mCalculatedMonthGoal, 
+	dbo.f_getMonthlyGoal(mo.UserId) + (mo.GrossDebits - mo.GrossCredits) AS mToReachCalcMonthGoal
+	
+        
+FROM  dbo.Months AS mo 
+INNER JOIN dbo.Years AS Y 
+ON mo.UserId = Y.UserId
+INNER JOIN dbo.Preferences AS pref
+ON mo.UserId = pref.UserId
+
+WHERE Y.StartingDate = CAST(DATEADD(yy, DATEDIFF(yy, 0, mo.StartingDate), 0) AS DATE)
+)

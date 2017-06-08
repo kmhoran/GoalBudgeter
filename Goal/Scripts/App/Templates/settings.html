@@ -31,7 +31,7 @@
                                     <tbody>
                                         <tr ng-repeat="credit in GLOB.credits">
                                             <td><strong>{{credit.Name}}</strong></td>
-                                            <td><a ng-click="SetC.deleteCategory(credit.CategoryId)"><span class="fa fa-trash fa-2x"></span></a></td>
+                                            <td><a class="cursor-pointer" ng-click="SetC.deleteCategory(credit.CategoryId)"><span class="fa fa-trash fa-2x"></span></a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -67,7 +67,7 @@
                                     <tbody>
                                         <tr ng-repeat="debit in GLOB.debits">
                                             <td><strong>{{debit.Name}}</strong></td>
-                                            <td><a ng-click="SetC.deleteCategory(debit.CategoryId)"><span class="fa fa-trash fa-2x"></span></a></td>
+                                            <td><a class="cursor-pointer" ng-click="SetC.deleteCategory(debit.CategoryId)"><span class="fa fa-trash fa-2x"></span></a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -91,7 +91,50 @@
                 <ul>
                     <li>aim for yearly goal</li>
                     <li>manual override</li>
+                    <li>Monthly budget options</li>
                 </ul>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Manage Monthly Savings Goal
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <strong>Set Savings Goal for this Month:</strong>
+                                </div>
+                                <!-- /.col-md-12 -->
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <form name="radio-form" class="form-check form-check-inline">
+                                        <lable for="radio-fixed" class="form-check-label">
+                                            <input id="radio-fixed" class="form-check-input" type="radio"  name="monthGoalType" value="Yearly" />
+                                            To reach Yearly goal ($12000)
+                                        </lable>
+                                        <lable for="radio-average" class="form-check-label">
+                                            <input id="radio-average" class="form-check-input" type="radio" name="monthGoalType" value="Manual" />
+                                            Manual Override
+                                        </lable>
+                                    </form>
+                                </div>
+                                <!-- /.col-md-6 -->
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <form name="mothly-goal-form" class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="number" class="form-control form-control-lg big" min="0" step="1" />
+                                        <span class="input-group-addon">.00</span>
+                                    </form>
+                                </div>
+                                <!-- /.col-md-6 -->
+                            </div>
+                            <!-- /.row -->
+                            
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel-info -->
+                </div>
+                <!-- /.col-md-12 -->
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div id="manage-income-categories" class="panel panel-green">
                         <div class="panel-heading">
@@ -127,7 +170,7 @@
                                             <td>
                                                 <form class="input-group">
                                                     <span class="input-group-addon">$</span>
-                                                    <input class="form-control" type="number" ng-disabled="credit.ForecastType != 'Fixed'" ng-model="credit.Predictions[credit.ForecastType]" />
+                                                    <input class="form-control" type="number" ng-disabled="credit.ForecastType != 'Fixed'" min="0" ng-model="credit.Predictions[credit.ForecastType]" />
                                                     <span class="input-group-addon">.00</span>
                                                 </form>
                                             </td>
@@ -151,7 +194,7 @@
                     </div>
                     <!-- /.panel -->
                 </div>
-                <!-- /.col-md-6 -->
+                <!-- /.col-md-12 -->
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="panel panel-red">
                         <div class="panel-heading">
@@ -215,7 +258,7 @@
                     </div>
                     <!-- /.panel -->
                 </div>
-                <!-- /.col-md-6 -->
+                <!-- /.col-md-12 -->
             </section>
         </div>
         <!-- ./month -->

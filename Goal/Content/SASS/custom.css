@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css?family=Merriweather");
 body .body-content {
   margin-top: 2em;
-  font-family: "Biryani", sans-serif; }
+  /*font-family: "Biryani", sans-serif;*/ }
 body #top-accent {
   background-color: #2ECC73;
   top: 10em;
@@ -47,6 +47,9 @@ input[type="radio"] {
 label p {
   font-size: 1.5em; }
 
+.cursor-pointer {
+  cursor: pointer; }
+
 /*splash*/
 .index-form .input-group {
   margin-bottom: 1em; }
@@ -75,6 +78,9 @@ label p {
     text-decoration: none;
     color: #ffffff; }
 
+.btn {
+  border-radius: 99em; }
+
 /*End splash*/
 /*New User Modal*/
 .modal-content .modal-success {
@@ -88,6 +94,9 @@ label p {
   font-size: 1.3em;
   color: #333;
   font-weight: 700; }
+.modal-content .modal-body p.pretext {
+  font-size: 1em;
+  color: #3290BE; }
 .modal-content .input-group {
   position: relative; }
 .modal-content .info-box {
@@ -108,6 +117,19 @@ label p {
   font-size: 1.3em; }
 .modal-content .fa-question-circle:hover {
   color: #3290BE; }
+.modal-content .step-markers {
+  text-align: center;
+  position: relative;
+  top: 1em;
+  color: #3290BE; }
+.modal-content .step-marker .fa {
+  /*font-size: 1.3em;*/
+  margin: 0 0.5em; }
+.modal-content .modal-body p.page-break {
+  color: #3290BE;
+  margin: 0.5em auto;
+  text-align: center;
+  font-size: 1.7em !important; }
 
 /*End New User Modal*/
 /*Budget Settings*/
@@ -117,6 +139,11 @@ label p {
 .button-row button {
   display: inline;
   margin-right: 1em; }
+
+.form-check.form-check-inline {
+  margin-bottom: 1em; }
+  .form-check.form-check-inline .form-check-label {
+    margin-right: 1em; }
 
 /*End BudgetSettings*/
 /*Authenticated layout*/
