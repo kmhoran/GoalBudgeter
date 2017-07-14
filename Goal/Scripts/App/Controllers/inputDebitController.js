@@ -56,10 +56,10 @@
             // TODO FIXME Delete
             console.log("payload: ", data);
 
-            //vm.$logHttpService.insertTransaction(data)
-            //.then(function handleCreditInsert(transactionData) {
-            //    console.log("HttpCreditData: ", transactionData.data);
-            //}).catch(_showError);
+            vm.$logHttpService.insertTransaction(data)
+            .then(function handleCreditInsert(transactionData) {
+                console.log("HttpCreditData: ", transactionData.data);
+            }).catch(_showError);
 
             $rootScope.$emit("onToastrSuccess", "Debit Added Successfully!");
 

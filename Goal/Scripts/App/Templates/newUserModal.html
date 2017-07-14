@@ -5,7 +5,7 @@
 </div>-->
 <!-- Body-->
 <form name="newUserForm">
-    <div class="part-one" ng-if="nUsrMC.partOne">
+    <div >
         <div class="modal-body">
 
             <h3 class="modal-title">Let's talk about your savings goal</h3>
@@ -24,24 +24,25 @@
                 <input type="number" name="goalAmount" class="form-control" min="0" ng-model="nUsrMC.preferences.goalAmount" placeholder="0" required />
                 <div class="input-group-addon">.00</div>
             </div>
-            <br/>
+            <!--<br/>
             <div class="step-markers">
                 <span class="fa fa-circle"></span>  
                 <span class="fa fa-circle-o"></span>
-            </div>
+            </div>-->
            
         </div>
         <!-- End Body -->
 
         <div class="modal-footer">
-            <input class="btn btn-lg btn-primary" type="button" ng-click="nUsrMC.toggleForm()" ng-disabled="newUserForm.startingAmount.$invalid || newUserForm.goalAmount.$invalid " value="Continue" />
+            <button class="btn btn-lg btn-success" type="button" ng-click="nUsrMC.submitForm()">Confirm</button>
+            <!--<input class="btn btn-lg btn-primary" type="button" ng-click="nUsrMC.toggleForm()" ng-disabled="newUserForm.startingAmount.$invalid || newUserForm.goalAmount.$invalid " value="Continue" />-->
         </div>
     </div>
     <!-- /.part-one -->
 
 
 
-    <div class="part-two" ng-if="!nUsrMC.partOne">
+    <!--<div class="part-two" ng-if="!nUsrMC.partOne">
         <div class="modal-body">
             <h3 class="modal-title">Ok, now to calculate your monthly budget</h3>
             <br />
@@ -72,13 +73,13 @@
             </div>
         </div>
         <!-- /.modal-body -->
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
             <input class="btn btn-lg btn-default" type="button" ng-click="nUsrMC.toggleForm()" value="Previous" />
             <input class="btn btn-lg btn-success" type="button" ng-click="nUsrMC.submitForm()" 
                    ng-disabled="nUsrMC.preferences.manualBudget == null && nUsrMC.preferences.predictedIncome == null" value="Confirm" />
             <!--<button class="btn btn-lg btn-success" type="button" ng-click="nUsrMC.submitForm()">Confirm</button>-->
-        </div>
-    </div>
+        <!-- </div>
+    </div>-->
     <!-- /.part-two -->
 
 

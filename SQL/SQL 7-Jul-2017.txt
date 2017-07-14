@@ -1,0 +1,277 @@
+SELECT        
+mo.MonthId
+, Y.YearId
+, mo.UserId
+, mo.StartingDate
+, mo.GrossCredits - mo.GrossDebits AS Saved
+, mo.GrossCredits
+, mo.GrossDebits
+, mo.StartingAmount
+, dbo.f_getMonthlyGoal(mo.UserId) AS MonthlyGoal
+, dbo.f_getMonthlyGoal(mo.UserId) + (mo.GrossDebits - mo.GrossCredits) AS ToReachGoal
+FROM          
+dbo.Months AS mo 
+INNER JOIN dbo.Years AS Y 
+ON CAST(DATEADD(yy, DATEDIFF(yy, 0, mo.StartingDate), 0) AS DATE) = Y.StartingDate 
+AND mo.UserId = Y.UserId
+
+
+
+
+---------------------------------------------------------------------------------------------
+ALTER PROCEDURE dbo.CurrentMonth_Calculate
+@userId nvarchar(128)
+
+AS
+BEGIN
+
+DECLARE @monthStart date = CAST(DATEADD(mm,DATEDIFF(mm,0,GETDATE()),0) AS DATE);
+
+-- # Calculate Budget # --
+-- Expenses --
+DECLARE @fixedExpenseBudget int;
+SELECT
+@fixedExpenseBudget = ISNULL(SUM(FixedPrediction), 0) 
+
+FROM Categories
+WHERE UserId = @userId
+AND ForecastType = 'Fixed'
+AND TransactionTypeId = 0
+--.........................................
+DECLARE @averageExpenseBudget int;
+SELECT
+@averageExpenseBudget = ISNULL(SUM(dbo.f_calculateCategoryAverageSpending(CategoryId)), 0) 
+
+FROM Categories
+WHERE UserId = @userId
+AND ForecastType = 'Average'
+AND TransactionTypeId = 0
+
+-- Income --
+DECLARE @fixedIncomeBudget int;
+SELECT
+@fixedIncomeBudget = ISNULL(SUM(FixedPrediction), 0) 
+
+FROM Categories
+WHERE UserId = @userId
+AND ForecastType = 'Fixed'
+AND TransactionTypeId = 1
+--.........................................
+DECLARE @averageIncomeBudget int;
+SELECT
+@averageIncomeBudget = ISNULL(SUM(dbo.f_calculateCategoryAverageSpending(CategoryId)), 0) 
+
+FROM Categories
+WHERE UserId = @userId
+AND ForecastType = 'Average'
+AND TransactionTypeId = 1
+-- # End Budget Calculation # --
+
+SELECT        
+Y.YearId AS yId
+, Y.StartingDate AS yStartingDate
+, Y.StartingAmount AS yStartingAmount
+, Y.Goal AS yGoal
+, mo.StartingAmount + (mo.GrossCredits - mo.GrossDebits) AS Balance
+, mo.StartingAmount + (mo.GrossCredits - mo.GrossDebits) - Y.StartingAmount AS ySaved
+, Y.Goal - (mo.StartingAmount + (mo.GrossCredits - mo.GrossDebits)) AS yAmountLeftToSave
+, mo.MonthId AS mId, mo.StartingDate AS mStartingDate
+, mo.GrossCredits - mo.GrossDebits AS mSaved
+, mo.GrossCredits AS mGrossCredits
+, mo.GrossDebits AS mGrossDebits
+, mo.StartingAmount AS mStartingAmount
+, @fixedExpenseBudget + @averageExpenseBudget AS mExpenseBudget
+, @fixedIncomeBudget + @averageIncomeBudget AS mIncomeBudget
+, pref.preferenceId AS pId, pref.MonthlyGoalType AS pGoalType
+, pref.MonthlyFixedGoal AS pFixedMonthGoal
+, pref.MonthlyFixedGoal + (mo.GrossDebits - mo.GrossCredits) AS mToReachFixedMonthGoal
+, dbo.f_getMonthlyGoal(mo.UserId) AS mCalculatedMonthGoal
+, dbo.f_getMonthlyGoal(mo.UserId) + (mo.GrossDebits - mo.GrossCredits) AS mToReachCalcMonthGoal
+
+FROM            
+dbo.Months AS mo 
+INNER JOIN dbo.Years AS Y 
+ON mo.UserId = Y.UserId 
+AND CAST(DATEADD(yy, DATEDIFF(yy, 0, mo.StartingDate), 0) AS DATE) = Y.StartingDate 
+INNER JOIN dbo.Preferences AS pref 
+ON mo.UserId = pref.UserId
+Where mo.UserId = @userId
+AND mo.StartingDate = @monthStart
+
+END
+
+---------------------------------------------------------------------------------------------------
+
+USE [GoalBudget]
+GO
+/****** Object:  UserDefinedFunction [dbo].[f_getMonthlyGoal]    Script Date: 07-Jul-17 18:45:31 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER FUNCTION [dbo].[f_getMonthlyGoal](@UserId nvarchar(128))
+RETURNS int
+AS
+BEGIN
+DECLARE @return int;
+DECLARE @goalType nvarchar(30);
+
+SELECT @goalType = MonthlyGoalType
+FROM dbo.Preferences
+WHERE UserId = @UserId
+
+--? If goal value is set to fixed override
+IF (@goalType) = 'Fixed'
+BEGIN
+
+   SELECT @return = MonthlyFixedGoal
+   FROM dbo.Preferences
+   WHERE UserId = @UserId
+
+END
+
+--? IF Calculate Year-based goal
+ELSE
+BEGIN
+    
+	DECLARE @jan1 date = CAST(DATEADD(yy, DATEDIFF(yy, 0, GETDATE()), 0) AS DATE)
+   --print DATEDIFF(mm, @jan1, dateadd(yy,1,@jan1))
+	--? IF this year is on record
+	IF EXISTS (SELECT YearId FROM dbo.Years Where StartingDate = @jan1 AND UserId = @UserId)
+	BEGIN
+		DECLARE @amountToReachGoal int;
+		-- ............................
+		SELECT @amountToReachGoal = Goal - FLOOR(StartingAmount)
+		FROM dbo.Years
+		Where UserId = @UserId
+		-- ............................
+
+		DECLARE @monthsThisYear int;
+		-- ............................
+		SELECT @monthsThisYear = DATEDIFF(mm, MIN(StartingDate), DATEADD(yy,1,@jan1))
+		FROM dbo.Months
+		WHERE UserId = @UserId AND
+		StartingDate > @jan1
+		-- ............................
+
+		SET @return = CEILING(@amountToReachGoal/@monthsThisYear) + 1;
+	END
+	--? IF this year has no record
+	ELSE
+	BEGIN
+		SET @return = -1;
+	END
+END
+
+RETURN @return
+
+END
+
+/*
+DECLARE @var nvarchar(50);
+SET @var = dbo.f_getMonthlyGoal('hasPreference');
+PRINT @var
+
+
+*/
+
+--------------------------------------------------------------------------------------------------
+
+
+USE [GoalBudget]
+GO
+/****** Object:  UserDefinedFunction [dbo].[func_testFunction]    Script Date: 07-Jul-17 18:44:17 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER FUNCTION [dbo].[func_testFunction](@InputText nvarchar(30))
+RETURNS nvarchar(50)
+AS
+BEGIN
+RETURN 'TEST: ' + @InputText
+END
+
+/*
+DECLARE @var nvarchar(50);
+SET @var = dbo.func_testFunction 'hello world';
+PRINT @var
+*/
+
+-----------------------------------------------------------------------------------------------------------
+
+CREATE FUNCTION [dbo].[f_calculateCategoryAverage](@categoryId int)
+
+
+RETURNS int
+AS
+BEGIN
+
+DECLARE @monthStart date = CAST(DATEADD(mm, DATEDIFF(mm, 0,getdate()), 0) AS DATE);
+DECLARE @yearStart date = CAST(DATEADD(yy, DATEDIFF(yy, 0,getdate()), 0) AS DATE);
+DECLARE @lastYearStart date = CAST(DATEADD(yy, -1, @yearStart) AS DATE);
+
+DECLARE @userId nvarchar(128);
+DECLARE @category nvarchar(50);
+-- .............................
+SELECT 
+@userId = UserId
+, @category = [Name]
+FROM [dbo].[Categories]
+Where CategoryId = @categoryId
+-- .............................
+
+
+DECLARE @thisYearSUM float;
+DECLARE @thisYearCOUNT int;
+-- ...........................
+Select 
+@thisYearSUM = SUM(Amount) 
+,@thisYearCOUNT = COUNT(TransactionId)
+From dbo.Transactions 
+WHERE UserId = @userId 
+AND Category = @category  
+AND [Date] >= @yearStart 
+AND [Date] < @monthStart 
+-- ...........................
+
+
+DECLARE @lastYearAVG float;
+-- ..........................
+SELECT
+@lastYearAVG = AVG(Amount)
+From dbo.Transactions 
+WHERE UserId = @userId 
+AND Category = @category 
+AND [Date] >= @lastYearStart
+AND [Date] < @yearStart 
+-- ..........................
+
+DECLARE @return int = (CEILING((@lastYearAVG + @thisYearSUM)/(@thisYearCOUNT + 1)));
+
+
+RETURN @return
+END
+
+
+-----------------------------------------------------------------------------------------------------------
+
+CREATE FUNCTION [dbo].[f_calculateUserBudget](@userId int)
+
+
+RETURNS int
+AS
+BEGIN
+
+Declare @totalFixedCategoryCosts int;
+Declare @totalAverageCategoryCosts int;
+
+SELECT 
+@totalFixedCategoryCosts = SUM(dbo.f_calculateCategoryAverage(CategoryId)) From dbo.Categories
+
+
+RETURN @return
+END
+

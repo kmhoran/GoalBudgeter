@@ -37,7 +37,7 @@
                         <span class="fa fa-money fa-5x"></span>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">$ 99</div>
+                        <div class="huge">$ {{GLOB.month.ExpenseBudget - GLOB.month.MonthDebits | number:0}}</div>
                         <div>Left in this Month's Budget</div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                         <span class="fa fa-star fa-5x"></span>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">$ 100</div>
+                        <div class="huge">$ {{GLOB.month.ToReachFixedGoal | number:0}}</div>
                         <div>Left to Reach Month's Goal</div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                         <span class="fa fa-trophy fa-5x"></span>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">$ 1,240</div>
+                        <div class="huge">$ {{GLOB.month.YearAmountToReachGoal | number:0}}</div>
                         <div>Left to Reach Year's Goal</div>
                     </div>
                 </div>

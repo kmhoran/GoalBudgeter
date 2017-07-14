@@ -12,15 +12,18 @@
 
         // Public Methods
         return {
-            insertTransaction: _insertTransaction,
-            getTransactionCategories: _getTransactionCategories,
-            insertTransactionCategory: _insertTransactionCategory,
-            updateCategories: _updateCategories,
-            deleteCategory: _deleteCategory,
-            initializeUserLog: _initializeUserLog
+            insertTransaction: _insertTransaction
+            ,getTransactionCategories: _getTransactionCategories
+            ,insertTransactionCategory: _insertTransactionCategory
+            ,updateCategories: _updateCategories
+            ,deleteCategory: _deleteCategory
+            ,getCurrentMonth: _getCurrentMonth
+            ,initializeUserLog: _initializeUserLog
         };
 
         // /////////////////////////////////////////////////////////////////////////////////////////
+
+        // --| Transactions |---------------------------------------------------------------------->
 
         function _insertTransaction(data) {
             var settings = {
@@ -58,7 +61,7 @@
         }
 
 
-        // .........................................................................................
+        // --| Categories |------------------------------------------------------------------------>
 
         function _updateCategories (data) {
             // Data should come as an array of category objects
@@ -85,8 +88,19 @@
             return $http(settings);
         }
 
+        // --| Months |---------------------------------------------------------------------------->
 
-        // .........................................................................................
+        function _getCurrentMonth() {
+            var settings = {
+                method: "GET"
+                , url: baseUrl.concat("/currentmonth")
+            };
+
+            return $http(settings);
+        }
+
+
+        // --| UserLog |--------------------------------------------------------------------------->
 
         function _initializeUserLog(data) {
             var settings = {

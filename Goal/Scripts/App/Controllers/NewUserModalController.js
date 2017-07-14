@@ -17,18 +17,16 @@
         vm.$uibModalInstance = $uibModalInstance;
 
         // Properties
-        vm.partOne = true;
+        //vm.partOne = true;
 
         vm.preferences = {
             startingAmount: null,
-            goalAmount: null,
-            manualBudget: null,
-            predictedIncome: null
+            goalAmount: null
         };
 
         // Methods
         vm.submitForm = _submitForm;
-        vm.toggleForm = _toggleForm;
+        //vm.toggleForm = _toggleForm;
         //vm.cancel = _cancel;
 
         // /////////////////////////////////////////////////////////////////////////////////////////

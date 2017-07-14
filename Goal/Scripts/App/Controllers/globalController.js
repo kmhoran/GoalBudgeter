@@ -19,7 +19,8 @@
         vm.credits = null;
         
         vm.debits = null;
-        vm.test = "TEST"
+        vm.test = "TEST";
+        vm.month = {}
 
         // Methods 
         vm.updateCreditForecastSettings = _updateCreditForecastSettings;
@@ -27,7 +28,8 @@
         vm.getTransactionCategories = _getTransactionCategories;
 
         // Startup Functions
-        _getTransactionCategories()
+        _getTransactionCategories();
+        _getCurrentMonth();
 
         // /////////////////////////////////////////////////////////////////////////////////////////
         // $rootscope broadcasting
@@ -57,6 +59,17 @@
                 $rootScope.$broadcast("RefreshCreditCategories")
 
             }).catch(_showError);
+        }
+
+        // .........................................................................................
+
+        function _getCurrentMonth() {
+            $logHttpService.getCurrentMonth()
+            .then(function populateCurrentMonth(thisMonth) {
+
+                vm.month = thisMonth.data.Item;
+                console.log("this is the current month: ", vm.month);
+            })
         }
 
 

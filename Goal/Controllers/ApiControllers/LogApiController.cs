@@ -15,8 +15,10 @@ using System.Web.Http.Routing;
 namespace Goal.Controllers.ApiControllers
 {
     [RoutePrefix("api/log")]
-    public class LogApiController: ApiController
+    public class LogApiController : ApiController
     {
+        //--| Transactions |----------------------------------------------------------------------->
+
         [Route("transaction"), HttpPost]
         public HttpResponseMessage InsertTransaction(TransactionInsertRequest model)
         {
@@ -37,7 +39,7 @@ namespace Goal.Controllers.ApiControllers
         }
 
 
-        // .........................................................................................
+        // --| Categories |------------------------------------------------------------------------> 
 
         [Route("categories"), HttpGet]
         public HttpResponseMessage GetUserTransactionCategories()
@@ -47,7 +49,7 @@ namespace Goal.Controllers.ApiControllers
                 HttpError error = new HttpError { Message = "Cannot process request for unauthenticated user." };
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, error);
             }
-             string userId = UserService.GetCurrentUserId();
+            string userId = UserService.GetCurrentUserId();
 
             CategoryCollectionDomain collection = LogService.GetUserCategories(userId);
 
@@ -129,6 +131,21 @@ namespace Goal.Controllers.ApiControllers
             return Request.CreateResponse(HttpStatusCode.OK, response);
         }
 
+        // --| Months |---------------------------------------------------------------------------->
+        [Authorize]
+        [Route("CurrentMonth"), HttpGet]
+        public HttpResponseMessage GetCuttentMonth()
+        {
+            string userId = UserService.GetCurrentUserId();
+
+            CurrentMonthDomain currentMonth = LogService.GetCurrentMonth(userId);
+
+            var response = new ItemResponse<CurrentMonthDomain> { Item = currentMonth };
+
+            return Request.CreateResponse(HttpStatusCode.OK, response); 
+        }
+
+        // --| User Log |-------------------------------------------------------------------------->
 
         [Route("initializeUserLog"), HttpPost]
         public HttpResponseMessage InsertNewUserLog(NewUserLogInsertRequest model)

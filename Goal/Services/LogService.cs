@@ -15,6 +15,7 @@ namespace Goal.Services
 {
     public class LogService : BaseService
     {
+        // --| Transactions |---------------------------------------------------------------------->
 
         public static int InsertTransaction(TransactionInsertRequest model)
         {
@@ -51,9 +52,7 @@ namespace Goal.Services
 
         }
 
-
-
-        // .........................................................................................
+        // --| Categories |------------------------------------------------------------------------>
 
         public static CategoryCollectionDomain GetUserCategories(string userId)
         {
@@ -75,13 +74,11 @@ namespace Goal.Services
                         int startingIndex = 0;
 
                         category.CategoryId = reader.GetSafeInt32(startingIndex++);
-                        category.UserId = reader.GetSafeString(startingIndex++);
                         category.Name = reader.GetSafeString(startingIndex++);
                         category.TypeId = (TransactionType)reader.GetSafeInt32(startingIndex++);
                         category.ForecastType = reader.GetSafeString(startingIndex++);
                         predictions.Fixed = reader.GetSafeInt32(startingIndex++);
                         predictions.Average = reader.GetSafeInt32(startingIndex++);
-                        predictions.Relative = reader.GetSafeInt32(startingIndex++);
 
                         category.Predictions = predictions;
 
@@ -290,6 +287,81 @@ namespace Goal.Services
         }
 
 
+        // --| Months |--------------------------------------------------------------------------->
+
+        public static CurrentMonthDomain GetCurrentMonth(string userId)
+        {
+            var currentMonth = new CurrentMonthDomain();
+            try
+            {
+                DataProvider.ExecuteCmd(GetConnection, "dbo.CurrentMonth_Calculate",
+                    inputParamMapper: delegate (SqlParameterCollection paramCollection)
+                    {
+                        paramCollection.AddWithValue("@userId", userId);
+                    },
+                    map: delegate (IDataReader reader, short set)
+                    {
+                        int staringIndex = 0;
+                        currentMonth.YearId = reader.GetSafeInt32(staringIndex++);
+                        currentMonth.YearStart = reader.GetSafeDateTime(staringIndex++);
+                        currentMonth.YearStartingAmount = reader.GetSafeDouble(staringIndex++);
+                        currentMonth.YearGoal = reader.GetSafeInt32(staringIndex++);
+                        currentMonth.Balance = reader.GetSafeDouble(staringIndex++);
+                        currentMonth.YearTotalSaved = reader.GetSafeDouble(staringIndex++);
+                        currentMonth.YearAmountToReachGoal = reader.GetSafeDouble(staringIndex++);
+                        currentMonth.MonthId = reader.GetSafeInt32(staringIndex++);
+                        currentMonth.MonthStart = reader.GetSafeDateTime(staringIndex++);
+                        currentMonth.TotalSaved = reader.GetSafeDouble(staringIndex++);
+                        currentMonth.MonthCredits = reader.GetSafeDouble(staringIndex++);
+                        currentMonth.MonthDebits = reader.GetSafeDouble(staringIndex++);
+                        currentMonth.MonthStartingAmount = reader.GetSafeDouble(staringIndex++);
+                        currentMonth.ExpenseBudget = reader.GetSafeInt32(staringIndex++);
+                        currentMonth.IncomeBudget = reader.GetSafeInt32(staringIndex++);
+                        currentMonth.PreferenceId = reader.GetSafeInt32(staringIndex++);
+                        currentMonth.GoalType = reader.GetSafeString(staringIndex++);
+                        currentMonth.FixedMonthGoal = reader.GetSafeInt32(staringIndex++);
+                        currentMonth.ToReachFixedGoal = reader.GetSafeDouble(staringIndex++);
+                        currentMonth.CalculatedMonthGoal = reader.GetSafeInt32(staringIndex++);
+                        currentMonth.ToReachCalculatedGoal = reader.GetSafeDouble(staringIndex++);
+                       
+                    });
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return currentMonth;
+        }
+
+
+        // --| User Log |-------------------------------------------------------------------------->
+        public static bool InitializeUserLog(NewUserLogInsertRequest model)
+        {
+            bool isSuccess = false;
+            try
+            {
+                DataProvider.ExecuteNonQuery(GetConnection, "dbo.Insert_FreshYearAndMonth",
+                    inputParamMapper: delegate (SqlParameterCollection paramCollection)
+                    {
+                        paramCollection.AddWithValue("@UserId", model.UserId);
+                        paramCollection.AddWithValue("@StartingDate", model.StartDate);
+                        paramCollection.AddWithValue("@StartingAmount", model.StartingAmount);
+                        paramCollection.AddWithValue("@YearGoal", model.GoalAmount);
+
+                        isSuccess = true;
+                    });
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return isSuccess;
+        }
+
+
+
         // .........................................................................................
 
         public static LogStatusType GetLogStatus(string userId)
@@ -321,32 +393,6 @@ namespace Goal.Services
             }
 
             return logStatus;
-        }
-
-        // .........................................................................................
-
-        public static bool InitializeUserLog(NewUserLogInsertRequest model)
-        {
-            bool isSuccess = false;
-            try
-            {
-                DataProvider.ExecuteNonQuery(GetConnection, "dbo.Insert_FreshYearAndMonth",
-                    inputParamMapper: delegate(SqlParameterCollection paramCollection)
-                    {
-                        paramCollection.AddWithValue("@UserId", model.UserId);
-                        paramCollection.AddWithValue("@StartingDate", model.StartDate);
-                        paramCollection.AddWithValue("@StartingAmount", model.StartingAmount);
-                        paramCollection.AddWithValue("@YearGoal", model.GoalAmount);
-
-                        isSuccess = true;
-                    });
-            }
-            catch(Exception e)
-            {
-                throw e;
-            }
-
-            return isSuccess;
         }
     }
 }
