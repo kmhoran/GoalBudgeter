@@ -169,5 +169,30 @@ namespace Goal.Controllers.ApiControllers
 
             return Request.CreateResponse(HttpStatusCode.OK, response);
         }
+
+
+        // --| Preferences |----------------------------------------------------------------------->
+
+        [Route("preferences"), HttpPut]
+        public HttpResponseMessage UpdateUserPreferences(PreferencceUpdateRequest model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            bool isSuccess = LogService.UpdateUserPreferences(model);
+
+            var response = new SuccessResponse();
+
+            if(!isSuccess)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.Conflict, "Unable to make update");
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+            }
+        }
     }
 }

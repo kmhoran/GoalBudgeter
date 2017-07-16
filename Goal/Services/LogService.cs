@@ -394,5 +394,33 @@ namespace Goal.Services
 
             return logStatus;
         }
+
+
+        // --| Preferences |----------------------------------------------------------------------->
+
+        public static bool UpdateUserPreferences(PreferencceUpdateRequest model)
+        {
+            bool isSuccess = false;
+
+            try
+            {
+                DataProvider.ExecuteNonQuery(GetConnection, "dbo.Preferences_Update",
+                    inputParamMapper: delegate (SqlParameterCollection paramCollection)
+                    {
+                        paramCollection.AddWithValue("@PreferenceId", model.PreferenceId);
+                        paramCollection.AddWithValue("@MonthlyGoalType", model.MonthlyGoalType);
+                        paramCollection.AddWithValue("@MonthlyFixedGoal", model.MonthlyFixedGoal);
+
+                        isSuccess = true;
+                    }
+                    );
+            }
+            catch (Exception e)
+            {
+                isSuccess = false;
+            }
+
+            return isSuccess;
+        }
     }
 }

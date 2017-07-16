@@ -19,6 +19,7 @@
             ,deleteCategory: _deleteCategory
             ,getCurrentMonth: _getCurrentMonth
             ,initializeUserLog: _initializeUserLog
+            ,updatePreferences: _updatePreferences
         };
 
         // /////////////////////////////////////////////////////////////////////////////////////////
@@ -106,6 +107,21 @@
             var settings = {
                 method: "POST",
                 url: baseUrl.concat("/initializeUserLog"),
+                data: data
+            };
+
+            return $http(settings);
+        }
+
+
+        // --| Preferences |----------------------------------------------------------------------->
+
+
+        function _updatePreferences(data) {
+
+            var settings = {
+                method: "PUT",
+                url: baseUrl.concat("/preferences"),
                 data: data
             };
 

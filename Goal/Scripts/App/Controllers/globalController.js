@@ -20,12 +20,15 @@
         
         vm.debits = null;
         vm.test = "TEST";
-        vm.month = {}
+        vm.month = {};
 
         // Methods 
         vm.updateCreditForecastSettings = _updateCreditForecastSettings;
         vm.updateDebitForecastSettings = _updateDebitForecastSettings;
         vm.getTransactionCategories = _getTransactionCategories;
+        vm.setMonthGoal = _setMonthGoal;
+        vm.updatePreferences = _updatePreferences;
+        vm.refreshPreferences = _refreshPreferences;
 
         // Startup Functions
         _getTransactionCategories();
@@ -40,6 +43,10 @@
 
         vm.$rootScope.$on("RefreshCategories", function () {
             _getTransactionCategories();
+        })
+
+        vm.$rootScope.$on("RefreshMonth", function () {
+            _getCurrentMonth();
         })
         // /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -99,6 +106,37 @@
         }
 
 
+
+        // .........................................................................................
+
+        function _updatePreferences() {
+            var payload = {
+                preferenceId: vm.month.PreferenceId
+                , MonthlyGoalType: vm.month.GoalType
+                , MonthlyFixedGoal: vm.month.FixedMonthGoal
+            };
+
+            $logHttpService.updatePreferences(payload)
+            .then(function handlePreferenceUpdateSuccess(message) {
+                console.log("preference response: ", message);
+                if (message.data.IsSuccessful) {
+                    _onToastrSuccess("Preferences Updated");
+                }
+            })
+        }
+
+
+
+        // .........................................................................................
+
+        function _refreshPreferences() {
+            _getCurrentMonth();
+        }
+
+        // .........................................................................................
+        function _setMonthGoal(type){
+            vm.month.GoalType = type;
+        }
 
         // .........................................................................................
 

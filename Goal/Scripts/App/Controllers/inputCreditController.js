@@ -65,6 +65,8 @@
 
             _refreshRoute();
 
+            $rootScope.$emit("RefreshMonth");
+
         }
 
 

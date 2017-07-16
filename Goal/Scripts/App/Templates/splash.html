@@ -13,13 +13,19 @@
     <div class="col-md-12 col-sm-12">
         <form id="transaction-btn-group" class="form-inline">
             <div class="col-md-4 col-sm-4 col-xs-12 transaction-btn">
-                <button id="select-credit-btn" type="button" class="btn btn-success btn-lg"><a href="#/inputcredit"><span class="fa fa-plus"></span> Add a Credit</a></button>
+                <a href="#/inputcredit">
+                    <button id="select-credit-btn" type="button" class="btn btn-success btn-lg"><span class="fa fa-plus"></span> Add a Credit</button>
+                </a>
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12 transaction-btn">
-                <button id="select-debit-btn" type="button" class="btn btn-danger btn-lg"><a href="#/inputdebit"><span class="fa fa-minus"></span> Add a Debit</a></button>
+                <a href="#/inputdebit">
+                    <button id="select-debit-btn" type="button" class="btn btn-danger btn-lg"><span class="fa fa-minus"></span> Add a Debit</button>
+                </a>
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12 transaction-btn">
-                <button id="select-log-btn" type="button" class="btn btn-info btn-lg"><a href="#/log"><span class="fa fa-list"></span> View Log</a></button>
+                <a href="#/log">
+                    <button id="select-log-btn" type="button" class="btn btn-info btn-lg"><span class="fa fa-list"></span> View Log</button>
+                </a>
             </div>
         </form>
     </div>
@@ -38,7 +44,12 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">$ {{GLOB.month.ExpenseBudget - GLOB.month.MonthDebits | number:0}}</div>
-                        <div>Left in this Month's Budget</div>
+                        <div><p>Left in this Month's Budget</p></div>
+                    </div>
+                    <hr/>
+                    <div class="col-md-12">
+                        <p>Spending Budget: ${{GLOB.month.ExpenseBudget}}</p>
+                        <p>Spent this Month: ${{GLOB.month.MonthDebits}}</p>
                     </div>
                 </div>
             </div>
@@ -64,7 +75,12 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">$ {{GLOB.month.ToReachFixedGoal | number:0}}</div>
-                        <div>Left to Reach Month's Goal</div>
+                        <div><p>Left to Reach Month's Goal</p></div>
+                    </div>
+                    <hr/>
+                    <div class="col-md-12">
+                        <p>Month Goal: ${{GLOB.month.GoalType == 'Yearly'? GLOB.month.CalculatedMonthGoal : GLOB.month.FixedMonthGoal}}</p>
+                        <p>Saved this Month: ${{GLOB.month.MonthCredits - GLOB.month.MonthDebits}}</p>
                     </div>
                 </div>
             </div>
@@ -90,7 +106,13 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge">$ {{GLOB.month.YearAmountToReachGoal | number:0}}</div>
-                        <div>Left to Reach Year's Goal</div>
+                        <div><p>Left to Reach Year's Goal</p></div>
+                    </div>
+                    <hr />
+                    <div class="col-md-12">
+                        <p>Year Goal: ${{GLOB.month.YearGoal}}</p>
+                        <p>Year Starting Amount: ${{GLOB.month.YearStartingAmount}}</p>
+                        <p>Balance: ${{GLOB.month.Balance}}</p>
                     </div>
                 </div>
             </div>
@@ -304,14 +326,5 @@
             <!-- /.panel-footer -->
         </div>
 
-    </div>
-    <div class="col-md-6 col-sm-6 year-chart">
-        <h2>This is a Year Chart</h2>
-    </div>
-    <div class="col-md-6 col-sm-6 month-chart">
-        <h2> This is a Month Chart</h2>
-    </div>
-    <div class="col-md-6 col-sm-6 year-chart">
-        <h2>This is a Year Chart</h2>
     </div>
 </div>
