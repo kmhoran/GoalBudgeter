@@ -210,7 +210,7 @@ namespace Goal.Services
 
         // .........................................................................................
 
-        public static bool UpdateCategory(CategoryDomain model)
+        public static bool UpdateCategory(CategoryUpdateRequest model)
         {
             bool isSuccess = false;
 
@@ -220,8 +220,9 @@ namespace Goal.Services
                     inputParamMapper:delegate( SqlParameterCollection paramCollection)
                     {
                         paramCollection.AddWithValue("@CategoryId", model.CategoryId);
+                        paramCollection.AddWithValue("@UserId", model.UserId);
                         paramCollection.AddWithValue("@ForcastType", model.ForecastType);
-                        paramCollection.AddWithValue("@FixedPrediction", model.Predictions.Fixed);
+                        paramCollection.AddWithValue("@FixedPrediction", model.FixedPrediction);
 
                         isSuccess = true;
                     }
@@ -239,24 +240,27 @@ namespace Goal.Services
 
         // .........................................................................................
 
-        public static bool UpdateCategoryCollection(CategoriesUpdateRequest model)
+        public static bool UpdateCategoryCollection(CategoriesUpdateRequest model, string userId)
         {
             bool isSuccess = false;
-
-            foreach(CategoryDomain category in model.CategoryList)
+            if (model.CategoryList != null && model.CategoryList.Count != 0)
             {
-                try
+                foreach (CategoryUpdateRequest category in model.CategoryList)
                 {
-                    UpdateCategory(category);
+                    try
+                    {
+                        category.UserId = userId;
+                        UpdateCategory(category);
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
                 }
-                catch(Exception e)
-                {
-                    throw e;
-                }
+
+                isSuccess = true;
             }
-
-            isSuccess = true;
-
+            
             return isSuccess;
         }
 

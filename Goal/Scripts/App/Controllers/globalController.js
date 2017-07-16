@@ -21,6 +21,7 @@
         vm.debits = null;
         vm.test = "TEST";
         vm.month = {};
+        vm.monthGoalAmount = 0;
 
         // Methods 
         vm.updateCreditForecastSettings = _updateCreditForecastSettings;
@@ -75,7 +76,8 @@
             .then(function populateCurrentMonth(thisMonth) {
 
                 vm.month = thisMonth.data.Item;
-                console.log("this is the current month: ", vm.month);
+
+                vm.monthGoalAmount = vm.month.GoalType == "Yearly" ? vm.month.CalculatedMonthGoal : vm.month.FixedMonthGoal;
             })
         }
 
@@ -83,7 +85,22 @@
         // .........................................................................................
 
         function _updateCreditForecastSettings() {
-            var payload = {CategoryList: vm.credits};
+
+            var categoryList = vm.credits.map(function mapCreditPayload(obj) {
+                var toReturn = {
+                    CategoryId: obj.CategoryId
+                    , Name: obj.Name
+                    , UserId: ""
+                    , TypeId: obj.TypeId
+                    , ForecastType: obj.ForecastType
+                    , FixedPrediction: obj.Predictions.Fixed
+                };
+
+                return toReturn;
+            });
+
+            var payload = { CategoryList: categoryList };
+
             $logHttpService.updateCategories(payload)
             .then(function updateCreditSuccess() {
                 var messageIn = "Income Forecasting Updated Successfully!";
@@ -96,7 +113,23 @@
         // .........................................................................................
 
         function _updateDebitForecastSettings() {
-            var payload = { CategoryList: vm.debits };
+
+            var categoryList = vm.debits.map(function mapDebitPayload (obj) {
+                var toReturn = {
+                    CategoryId: obj.CategoryId
+                    ,Name: obj.Name
+                    ,UserId: ""
+                    , TypeId: obj.TypeId
+                    , ForecastType: obj.ForecastType
+                    ,FixedPrediction: obj.Predictions.Fixed
+                };
+
+                return toReturn;
+            });
+
+            var payload = { CategoryList: categoryList };
+
+
             $logHttpService.updateCategories(payload)
             .then(function updatedebitSuccess() {
                 var messageIn = "Expese Forecasting Updated Successfully!";

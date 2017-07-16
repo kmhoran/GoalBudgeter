@@ -8,6 +8,6 @@ namespace Goal.Models.Requests
 {
     public class CategoriesUpdateRequest
     {
-        public List<CategoryDomain> CategoryList { get; set; }
+        public List<CategoryUpdateRequest> CategoryList { get; set; }
     }
 }

@@ -9,6 +9,5 @@ namespace Goal.Models.Domain
     {
         public int Fixed { get; set; }
         public int Average { get; set; }
-        public int Relative { get; set; }
     }
 }

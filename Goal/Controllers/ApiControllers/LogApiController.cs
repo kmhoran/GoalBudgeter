@@ -101,7 +101,9 @@ namespace Goal.Controllers.ApiControllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
 
-            bool isSuccess = LogService.UpdateCategoryCollection(model);
+            string userId = UserService.GetCurrentUserId(); 
+
+            bool isSuccess = LogService.UpdateCategoryCollection(model, userId);
 
             var response = new ItemResponse<bool> { Item = isSuccess };
 

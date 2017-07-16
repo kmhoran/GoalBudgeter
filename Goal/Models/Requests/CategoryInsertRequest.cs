@@ -12,6 +12,6 @@ namespace Goal.Models.Requests
         public string Name { get; set; }
         public TransactionType TypeId { get; set; }
         public string ForecastType { get; set; }
-        public decimal FixedPrediction { get; set; }
+        public int FixedPrediction { get; set; }
     }
 }

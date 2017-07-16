@@ -15,7 +15,7 @@
             insertTransaction: _insertTransaction
             ,getTransactionCategories: _getTransactionCategories
             ,insertTransactionCategory: _insertTransactionCategory
-            ,updateCategories: _updateCategories
+            , updateCategories: _updateCategories
             ,deleteCategory: _deleteCategory
             ,getCurrentMonth: _getCurrentMonth
             ,initializeUserLog: _initializeUserLog
