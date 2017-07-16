@@ -37,8 +37,8 @@ namespace Goal.Services
                         category.Real = reader.GetSafeDouble(startingIndex++);
                         // Determine which category forcast to use
                         forcastType = reader.GetSafeString(startingIndex++);
-                        averageValue = reader.GetSafeDouble(startingIndex++);
-                        fixedValue = reader.GetSafeDouble(startingIndex++);
+                        averageValue = reader.GetSafeInt32(startingIndex++);
+                        fixedValue = reader.GetSafeInt32(startingIndex++);
 
                         category.Predicted = forcastType == "Average" ? averageValue : fixedValue;
                         

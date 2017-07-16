@@ -184,6 +184,7 @@
     <Compile Include="Classes\Exceptions\IdentityResultException.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\LogApiController.cs" />
+    <Compile Include="Controllers\ApiControllers\ReportApiController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\GoalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
