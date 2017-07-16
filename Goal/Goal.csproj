@@ -198,6 +198,7 @@
     <Compile Include="Models\Domain\CategoryDomain.cs" />
     <Compile Include="Models\Domain\CurrentMonthDomain.cs" />
     <Compile Include="Models\Domain\EmailDomain.cs" />
+    <Compile Include="Models\Domain\Reports\MonthlySpendingByCategoryDomain.cs" />
     <Compile Include="Models\Requests\NewUserLogInsertRequest.cs" />
     <Compile Include="Models\Requests\PreferencceUpdateRequest.cs" />
     <Compile Include="Models\ViewModels\BaseViewModel.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\LogService.cs" />
+    <Compile Include="Services\ReportService.cs" />
     <Compile Include="Services\TokenService.cs" />
     <Compile Include="Services\UserAccountService.cs" />
     <Compile Include="Services\UserService.cs" />
