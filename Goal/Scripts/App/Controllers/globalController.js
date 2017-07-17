@@ -4,15 +4,16 @@
     angular.module(APPNAME)
     .controller('globalController', GlobalController);
 
-    GlobalController.$inject = ['$scope', '$rootScope', '$logHttpService'];
+    GlobalController.$inject = ['$scope', '$rootScope', '$logHttpService', '$reportService'];
 
-    function GlobalController($scope, $rootScope, $logHttpService) {
+    function GlobalController($scope, $rootScope, $logHttpService, $reportService) {
 
         // Injection
         var vm = this;
         vm.$scope = $scope;
         vm.$rootScope = $rootScope;
         vm.$logHttpService = $logHttpService;
+        vm.$reportService = $reportService;
 
         // Properties
 
@@ -22,6 +23,20 @@
         vm.test = "TEST";
         vm.month = {};
         vm.monthGoalAmount = 0;
+
+        
+
+        // --> reports
+        vm.reports = {
+            categorySpending: [
+                    { name: "Gifts", pred: 999, real: 500 },
+                    { name: "other", pred: 888, real: 400 },
+                    { name: "Health", pred: 666, real: 300 },
+            ]
+        };
+
+        vm.delinquentCategories = [];
+        //--
 
         // Methods 
         vm.updateCreditForecastSettings = _updateCreditForecastSettings;
@@ -34,7 +49,7 @@
         // Startup Functions
         _getTransactionCategories();
         _getCurrentMonth();
-
+        _getLatestReports();
         // /////////////////////////////////////////////////////////////////////////////////////////
         // $rootscope broadcasting
 
@@ -44,10 +59,13 @@
 
         vm.$rootScope.$on("RefreshCategories", function () {
             _getTransactionCategories();
+            _getCurrentMonth();
+            _getLatestReports();
         })
 
         vm.$rootScope.$on("RefreshMonth", function () {
             _getCurrentMonth();
+            _getLatestReports();
         })
         // /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -80,6 +98,14 @@
                 vm.monthGoalAmount = vm.month.GoalType == "Yearly" ? vm.month.CalculatedMonthGoal : vm.month.FixedMonthGoal;
             })
         }
+
+
+        // .........................................................................................
+
+        function _getLatestReports() {
+            _reportGetMonthlySpendingByCategory();
+        }
+
 
 
         // .........................................................................................
@@ -177,6 +203,37 @@
             console.log("Something went wrong: ", error);
         }
 
+
+        // --| Reports |--------------------------------------------------------------------------->
+
+        function _reportGetMonthlySpendingByCategory() {
+            $reportService.getMonthlySpendingByCategory()
+            .then(function (response) {
+                console.log("reports: ", response);
+                var report = response.data.Items;
+
+                if(report != null && report.length > 0)
+                {
+                    var result = [];
+                    for (var i = 0, len = report.length; i < len; i++) {
+
+                        // Get 
+                        var obj = {
+                            name: report[i].CategoryName,
+                            pred: report[i].Predicted,
+                            real: report[i].Real
+                        }
+
+                        if (report[i].Predicted < report[i].Real) {
+                            vm.delinquentCategories.push(report[i].CategoryName);
+                        }
+
+                        result.push(obj);
+                    }
+                    vm.reports.categorySpending = result;
+                }
+            })
+        }
 
 
     }

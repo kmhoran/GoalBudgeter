@@ -257,6 +257,7 @@
     <Content Include="Scripts\App\Controllers\wishlistPageController.js" />
     <Content Include="Scripts\App\Controllers\yearPageController.js" />
     <Content Include="Scripts\App\Services\LogHttpService.js" />
+    <Content Include="Scripts\App\Services\ReportHttpService.js" />
     <Content Include="Scripts\App\Templates\input.html" />
     <Content Include="Scripts\App\Templates\log.html" />
     <Content Include="Scripts\App\Templates\month.html" />

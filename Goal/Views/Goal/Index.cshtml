@@ -14,7 +14,7 @@
     <link href="~/Content/Theme/Vendor/morris.css" rel="stylesheet" />
 }
 
-@if(Model.LogStatus == Goal.Enums.LogStatusType.NewUser)
+@if (Model.LogStatus == Goal.Enums.LogStatusType.NewUser)
 {
     <div ng-controller="newUserController as nUsrC"></div>
 }
@@ -45,6 +45,7 @@
     <script src="~/Scripts/App/Config/pageRouting.js"></script>
     <!-- Services -->
     <script src="~/Scripts/App/Services/LogHttpService.js"></script>
+    <script src="~/Scripts/App/Services/ReportHttpService.js"></script>
     <!-- ngRoute View Controllers -->
     <script src="~/Scripts/App/Controllers/globalController.js"></script>
     <script src="~/Scripts/App/Controllers/splashPageController.js"></script>
@@ -55,8 +56,8 @@
     <script src="~/Scripts/App/Controllers/monthPageController.js"></script>
     <script src="~/Scripts/App/Controllers/yearPageController.js"></script>
     <script src="~/Scripts/App/Controllers/wishlistPageController.js"></script>
-    
-    @if(Model.LogStatus == Goal.Enums.LogStatusType.NewUser)
+
+    @if (Model.LogStatus == Goal.Enums.LogStatusType.NewUser)
     {
         <script src="~/Scripts/App/Controllers/NewUserModalController.js"></script>
         <script src="~/Scripts/App/Controllers/NewUserController.js"></script>
