@@ -81,6 +81,15 @@ label p {
 .btn {
   border-radius: 99em; }
 
+.delinquent-categories {
+  background-color: #FC827F;
+  border-color: #D9534F;
+  font-weight: 700;
+  margin: 0 0.5em; }
+  .delinquent-categories a {
+    text-decoration: none;
+    color: #ffffff; }
+
 /*End splash*/
 /*New User Modal*/
 .modal-content .modal-success {

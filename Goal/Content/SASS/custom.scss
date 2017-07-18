@@ -127,6 +127,18 @@ label p {
 .btn {
     border-radius: 99em;
 }
+
+.delinquent-categories{
+    background-color: $danger-light;
+    border-color: $danger;
+    font-weight: 700;
+    margin: 0 0.5em;
+
+    a{
+        text-decoration: none;
+        color: $white;
+    }
+}
 /*End splash*/
 /*New User Modal*/
 .modal-content {
