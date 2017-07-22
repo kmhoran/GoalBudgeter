@@ -13,7 +13,7 @@ namespace Goal.Models.Requests
         public decimal Amount { get; set; }
 
         [Required]
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
 
         [Required]
         public DateTime Date { get; set; }

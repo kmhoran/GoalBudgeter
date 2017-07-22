@@ -59,7 +59,8 @@
             vm.$logHttpService.insertTransactionCategory(payload)
             .then(function handleCategoryAdd() {
                 $rootScope.$emit("onToastrSuccess", "Category Added Successfully!");
-                $rootScope.$emit("RefreshCategories");
+                //$rootScope.$emit("RefreshCategories");
+                $rootScope.$emit("RefreshPage");
             }).catch(_showError);
             
         }
@@ -72,7 +73,8 @@
                 vm.$logHttpService.deleteCategory(categoryId)
             .then(function () {
                 $rootScope.$emit("onToastrSuccess", "Category Removed Successfully!");
-                $rootScope.$emit("RefreshCategories");
+                //$rootScope.$emit("RefreshCategories");
+                $rootScope.$emit("RefreshPage");
             }).catch(_showError);
             }
         }

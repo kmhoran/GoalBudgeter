@@ -22,8 +22,8 @@
             <div class="input-group" ng-class="{'has-error': inputForm.category == null && !inputForm.category.$pristine, 'has-success':inputForm.category != null && !inputForm.category.$pristine}">
                 <div class="input-group-addon"><span class="fa fa-list"></span></div>
                 <select placeholder-text-single="rest" name="category" class="form-control" ng-model="InC.category"  required>
-                    <option ng-if="InC.type=='credit'" value="{{category.Name}}" ng-repeat="category in GLOB.credits">{{category.Name}}</option>
-                    <option ng-if="InC.type=='debit'" value="{{category.Name}}" ng-repeat="category in GLOB.debits">{{category.Name}}</option>
+                    <option ng-if="InC.type=='credit'" value="{{category.CategoryId}}" ng-repeat="category in GLOB.credits">{{category.Name}}</option>
+                    <option ng-if="InC.type=='debit'" value="{{category.CategoryId}}" ng-repeat="category in GLOB.debits">{{category.Name}}</option>
                 </select>
             </div>
 

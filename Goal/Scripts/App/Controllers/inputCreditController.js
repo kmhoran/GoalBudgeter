@@ -46,7 +46,7 @@
 
             var data = {
                 amount: vm.amount,
-                category: vm.category,
+                categoryId: Number(vm.category),
                 date: vm.date.toLocaleDateString(),
                 description: vm.description,
                 // typeId 1 == Credit
@@ -54,19 +54,22 @@
             };
 
             // TODO FIXME Delete
-            console.log("payload: ", data);
+            //console.log("payload: ", data);
 
-            vm.$logHttpService.insertTransaction(data)
-            .then(function handleCreditInsert(transactionData) {
-                console.log("HttpCreditData: ", transactionData.data);
-            }).catch(_showError);
+            vm.$loghttpservice.inserttransaction(data)
+            .then(function handlecreditinsert(transactiondata) {
+                console.log("httpcreditdata: ", transactiondata.data);
 
-            $rootScope.$emit("onToastrSuccess", "Credit Added Successfully!");
+                $rootscope.$emit("ontoastrsuccess", "credit added successfully!");
 
-            _refreshRoute();
+                _refreshroute();
 
-            $rootScope.$emit("RefreshMonth");
+                //$rootscope.$emit("refreshmonth");
+                $rootscope.$emit("refreshpage");
 
+            }).catch(_showerror);
+
+            
         }
 
 
@@ -90,6 +93,7 @@
 
         function _showError(error) {
             console.log("Something went wrong: ", error);
+            toastr.error("Woops! Something went wrong...");
         }
 
     }

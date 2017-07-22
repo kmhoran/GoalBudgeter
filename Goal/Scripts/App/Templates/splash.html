@@ -86,8 +86,8 @@
                     </div>
                     <hr/>
                     <div class="col-md-12">
-                        <p>Month Goal: ${{GLOB.month.GoalType == 'Yearly'? GLOB.month.CalculatedMonthGoal : GLOB.month.FixedMonthGoal}}</p>
-                        <p>Saved this Month: ${{GLOB.month.MonthCredits - GLOB.month.MonthDebits}}</p>
+                        <p>Month Goal: ${{GLOB.monthGoalAmount | number:2}}</p>
+                        <p>Saved this Month: ${{GLOB.month.MonthCredits - GLOB.month.MonthDebits | number:2}}</p>
                     </div>
                 </div>
             </div>
@@ -117,9 +117,9 @@
                     </div>
                     <hr />
                     <div class="col-md-12">
-                        <p>Year Goal: ${{GLOB.month.YearGoal}}</p>
-                        <p>Year Starting Amount: ${{GLOB.month.YearStartingAmount}}</p>
-                        <p>Balance: ${{GLOB.month.Balance}}</p>
+                        <p>Year Goal: ${{GLOB.month.YearGoal | number:0}}</p>
+                        <p>Year Starting Amount: ${{GLOB.month.YearStartingAmount | number:2}}</p>
+                        <p>Balance: ${{GLOB.month.Balance | number:2}}</p>
                     </div>
                 </div>
             </div>

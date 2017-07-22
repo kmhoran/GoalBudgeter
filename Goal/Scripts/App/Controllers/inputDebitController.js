@@ -46,7 +46,7 @@
 
             var data = {
                 amount: vm.amount,
-                category: vm.category,
+                categoryId: Number(vm.category),
                 date: vm.date.toLocaleDateString(),
                 description: vm.description,
                 // typeId 0 == Debit
@@ -54,18 +54,22 @@
             };
 
             // TODO FIXME Delete
-            console.log("payload: ", data);
+            //console.log("payload: ", data);
 
             vm.$logHttpService.insertTransaction(data)
             .then(function handleCreditInsert(transactionData) {
                 console.log("HttpCreditData: ", transactionData.data);
+
+                $rootScope.$emit("onToastrSuccess", "Debit Added Successfully!");
+
+                _refreshRoute();
+
+                //$rootScope.$emit("RefreshMonth");
+                $rootScope.$emit("RefreshPage");
+
             }).catch(_showError);
 
-            $rootScope.$emit("onToastrSuccess", "Debit Added Successfully!");
-
-            _refreshRoute();
-
-            $rootScope.$emit("RefreshMonth");
+            
         }
 
 

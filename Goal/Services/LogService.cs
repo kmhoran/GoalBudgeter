@@ -27,7 +27,7 @@ namespace Goal.Services
                     inputParamMapper: delegate (SqlParameterCollection paramCollection)
                     {
                         paramCollection.AddWithValue("@amount", model.Amount);
-                        paramCollection.AddWithValue("@category", model.Category);
+                        paramCollection.AddWithValue("@categoryId", model.CategoryId);
                         paramCollection.AddWithValue("@date", model.Date);
                         paramCollection.AddWithValue("@description", model.Description);
                         paramCollection.AddWithValue("@typeId", model.TypeId);

@@ -57,6 +57,11 @@
             _onToastrSuccess(messageIn);
         });
 
+
+        vm.$rootScope.$on("RefreshPage", function () {
+            _refreshPage();
+        })
+
         vm.$rootScope.$on("RefreshCategories", function () {
             _getTransactionCategories();
             _getCurrentMonth();
@@ -71,6 +76,15 @@
 
         function _onToastrSuccess(message) {
             toastr.success(message);
+        }
+
+
+        // .........................................................................................
+
+        function _refreshPage() {
+            _getTransactionCategories();
+            _getCurrentMonth();
+            _getLatestReports();
         }
 
 
@@ -131,7 +145,7 @@
             .then(function updateCreditSuccess() {
                 var messageIn = "Income Forecasting Updated Successfully!";
                 _onToastrSuccess(messageIn)
-                _getTransactionCategories();
+                _refreshPage();
             }).catch(_showError)
         }
 
@@ -160,7 +174,7 @@
             .then(function updatedebitSuccess() {
                 var messageIn = "Expese Forecasting Updated Successfully!";
                 _onToastrSuccess(messageIn)
-                _getTransactionCategories();
+                _refreshPage();
             }).catch(_showError)
         }
 
@@ -180,6 +194,7 @@
                 console.log("preference response: ", message);
                 if (message.data.IsSuccessful) {
                     _onToastrSuccess("Preferences Updated");
+                    _refreshPage();
                 }
             })
         }
@@ -189,7 +204,8 @@
         // .........................................................................................
 
         function _refreshPreferences() {
-            _getCurrentMonth();
+            //_getCurrentMonth();
+            _refreshPage();
         }
 
         // .........................................................................................
@@ -201,6 +217,7 @@
 
         function _showError(error) {
             console.log("Something went wrong: ", error);
+            toastr.error("Woops! Something went wrong...");
         }
 
 
