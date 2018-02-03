@@ -19,132 +19,138 @@ namespace Goal.Controllers.ApiControllers
     {
         //--| Transactions |----------------------------------------------------------------------->
 
-        [Route("transaction"), HttpPost]
-        public HttpResponseMessage InsertTransaction(TransactionInsertRequest model)
-        {
-            string userId = UserService.GetCurrentUserId();
+        //[Route("transaction"), HttpPost]
+        //public HttpResponseMessage InsertTransaction(TransactionInsertRequest model)
+        //{
+        //    string userId = UserService.GetCurrentUserId();
 
-            if (!ModelState.IsValid || userId == null)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
+        //    if (!ModelState.IsValid || userId == null)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+        //    }
 
-            model.UserId = userId;
+        //    model.UserId = userId;
 
-            int transactionId = LogService.InsertTransaction(model);
+        //    int transactionId = LogService.Data.InsertTransaction(model);
 
-            var response = new ItemResponse<int> { Item = transactionId };
+        //    var response = new ItemResponse<int> { Item = transactionId };
 
-            return Request.CreateResponse(HttpStatusCode.OK, response);
-        }
+        //    return Request.CreateResponse(HttpStatusCode.OK, response);
+        //}
 
 
         // --| Categories |------------------------------------------------------------------------> 
 
-        [Route("categories"), HttpGet]
-        public HttpResponseMessage GetUserTransactionCategories()
-        {
-            if (!UserService.IsLoggedIn())
-            {
-                HttpError error = new HttpError { Message = "Cannot process request for unauthenticated user." };
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, error);
-            }
-            string userId = UserService.GetCurrentUserId();
+        //[Route("categories"), HttpGet]
+        //public HttpResponseMessage GetUserTransactionCategories()
+        //{
+        //    if (!UserService.IsLoggedIn())
+        //    {
+        //        HttpError error = new HttpError { Message = "Cannot process request for unauthenticated user." };
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, error);
+        //    }
+        //    string userId = UserService.GetCurrentUserId();
 
-            CategoryCollectionDomain collection = LogService.GetUserCategories(userId);
+        //    CategoryCollectionDomain collection = LogService.Data.GetUserCategories(userId);
 
-            var response = new ItemResponse<CategoryCollectionDomain> { Item = collection };
+        //    var response = new ItemResponse<CategoryCollectionDomain> { Item = collection };
 
-            return Request.CreateResponse(HttpStatusCode.OK, response);
-        }
-
-
-        // .........................................................................................
-
-        [Route("categories"), HttpPost]
-        public HttpResponseMessage InsertCategory(CategoryInsertRequest model)
-        {
-            if (!UserService.IsLoggedIn())
-            {
-                HttpError error = new HttpError { Message = "Cannot process request for unauthenticated user." };
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, error);
-            }
-            if (!ModelState.IsValid)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
-
-            model.UserId = UserService.GetCurrentUserId();
-            model.ForecastType = "Fixed";
-            model.FixedPrediction = 20;
-
-            int categoryId = LogService.InsertCategory(model);
-
-            var response = new ItemResponse<int> { Item = categoryId };
-
-            return Request.CreateResponse(HttpStatusCode.OK, response);
-        }
+        //    return Request.CreateResponse(HttpStatusCode.OK, response);
+        //}
 
 
         // .........................................................................................
 
-        [Route("categories"), HttpPut]
-        public HttpResponseMessage UpdateCategories(CategoriesUpdateRequest model)
-        {
-            if (!UserService.IsLoggedIn())
-            {
-                HttpError error = new HttpError { Message = "Cannot process request for unauthenticated user." };
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, error);
-            }
-            if (!ModelState.IsValid)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
+        //[Route("categories"), HttpPost]
+        //public HttpResponseMessage InsertCategory(CategoryInsertRequest model)
+        //{
+        //    if (!UserService.IsLoggedIn())
+        //    {
+        //        HttpError error = new HttpError { Message = "Cannot process request for unauthenticated user." };
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, error);
+        //    }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+        //    }
 
-            string userId = UserService.GetCurrentUserId(); 
+        //    model.UserId = UserService.GetCurrentUserId();
+        //    model.ForecastType = "Fixed";
+        //    model.FixedPrediction = 20;
 
-            bool isSuccess = LogService.UpdateCategoryCollection(model, userId);
+        //    int categoryId = LogService.Data.InsertCategory(model);
 
-            var response = new ItemResponse<bool> { Item = isSuccess };
+        //    var response = new ItemResponse<int> { Item = categoryId };
 
-            return Request.CreateResponse(HttpStatusCode.OK, response);
-        }
+        //    return Request.CreateResponse(HttpStatusCode.OK, response);
+        //}
 
 
         // .........................................................................................
 
-        [Route("category"), HttpDelete]
-        public HttpResponseMessage DeleteCategories(int categoryId)
-        {
-            if (!UserService.IsLoggedIn())
-            {
-                HttpError error = new HttpError { Message = "Cannot process request for unauthenticated user." };
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, error);
-            }
-            if (!ModelState.IsValid)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
+        //[Route("categories"), HttpPut]
+        //public HttpResponseMessage UpdateCategories(CategoriesUpdateRequest model)
+        //{
+        //    if (!UserService.IsLoggedIn())
+        //    {
+        //        HttpError error = new HttpError { Message = "Cannot process request for unauthenticated user." };
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, error);
+        //    }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+        //    }
 
-            bool isSuccess = LogService.DeleteCategory(categoryId);
+        //    string userId = UserService.GetCurrentUserId(); 
 
-            var response = new ItemResponse<bool> { Item = isSuccess };
+        //    bool isSuccess = LogService.Data.UpdateCategoryCollection(model, userId);
 
-            return Request.CreateResponse(HttpStatusCode.OK, response);
-        }
+        //    var response = new ItemResponse<bool> { Item = isSuccess };
+
+        //    return Request.CreateResponse(HttpStatusCode.OK, response);
+        //}
+
+
+        // .........................................................................................
+
+        //[Route("category"), HttpDelete]
+        //public HttpResponseMessage DeleteCategories(int categoryId)
+        //{
+        //    if (!UserService.IsLoggedIn())
+        //    {
+        //        HttpError error = new HttpError { Message = "Cannot process request for unauthenticated user." };
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, error);
+        //    }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+        //    }
+
+        //    bool isSuccess = LogService.Data.DeleteCategory(categoryId);
+
+        //    var response = new ItemResponse<bool> { Item = isSuccess };
+
+        //    return Request.CreateResponse(HttpStatusCode.OK, response);
+        //}
 
         // --| Months |---------------------------------------------------------------------------->
         [Authorize]
         [Route("CurrentMonth"), HttpGet]
         public HttpResponseMessage GetCuttentMonth()
         {
-            string userId = UserService.GetCurrentUserId();
+            try
+            {
+                Month currentMonth = LogService.GetCurrentMonth();
 
-            CurrentMonthDomain currentMonth = LogService.GetCurrentMonth(userId);
+                var response = new ItemResponse<Month> { Item = currentMonth };
 
-            var response = new ItemResponse<CurrentMonthDomain> { Item = currentMonth };
-
-            return Request.CreateResponse(HttpStatusCode.OK, response); 
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+            }
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+            
         }
 
         // --| User Log |-------------------------------------------------------------------------->
@@ -157,44 +163,50 @@ namespace Goal.Controllers.ApiControllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
 
-            model.UserId = UserService.GetCurrentUserId();
-            model.StartDate = DateTime.Today;
-
-            bool isSuccess = LogService.InitializeUserLog(model);
-
-            if (isSuccess)
+            try
             {
-                isSuccess = LogService.InsertDefaultCategories(model.UserId);
+                bool isSuccess = LogService.CreateNewLog(model);
+
+                if (isSuccess)
+                {
+                    var response = new ItemResponse<bool> { Item = isSuccess };
+
+                    return Request.CreateResponse(HttpStatusCode.OK, response);
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Unable to Process Request.");
+                }
             }
-
-            var response = new ItemResponse<bool> { Item = isSuccess };
-
-            return Request.CreateResponse(HttpStatusCode.OK, response);
+            catch(Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
         }
 
 
         // --| Preferences |----------------------------------------------------------------------->
 
-        [Route("preferences"), HttpPut]
-        public HttpResponseMessage UpdateUserPreferences(PreferencceUpdateRequest model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
+        //[Route("preferences"), HttpPut]
+        //public HttpResponseMessage UpdateUserPreferences(PreferencceUpdateRequest model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+        //    }
 
-            bool isSuccess = LogService.UpdateUserPreferences(model);
+        //    bool isSuccess = LogService.Data.UpdateUserPreferences(model);
 
-            var response = new SuccessResponse();
+        //    var response = new SuccessResponse();
 
-            if(!isSuccess)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.Conflict, "Unable to make update");
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, response);
-            }
-        }
+        //    if(!isSuccess)
+        //    {
+        //        return Request.CreateErrorResponse(HttpStatusCode.Conflict, "Unable to make update");
+        //    }
+        //    else
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.OK, response);
+        //    }
+        //}
     }
 }

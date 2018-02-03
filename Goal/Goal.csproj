@@ -49,6 +49,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MoreLinq, Version=2.6.20831.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.2.7.0\lib\net40\MoreLinq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Sabio.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sabio.Data.1.0.2\lib\net40\Sabio.Data.dll</HintPath>
       <Private>True</Private>
@@ -56,6 +60,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -189,16 +197,25 @@
     <Compile Include="Controllers\GoalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Enums\LogStatusType.cs" />
+    <Compile Include="Enums\LogEventType.cs" />
+    <Compile Include="Enums\MonthGoalType.cs" />
     <Compile Include="Enums\TransactionType.cs" />
+    <Compile Include="Enums\UserType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DbMonth.cs" />
+    <Compile Include="Models\DbPreferences.cs" />
+    <Compile Include="Models\Domain\Category.cs" />
     <Compile Include="Models\Domain\CategoryCollectionDomain.cs" />
     <Compile Include="Models\Domain\CategoryDomain.cs" />
-    <Compile Include="Models\Domain\CurrentMonthDomain.cs" />
+    <Compile Include="Models\Domain\CurrentMonth.cs" />
+    <Compile Include="Models\Domain\MonthSnapshot.cs" />
+    <Compile Include="Models\Domain\OLDCurrentMonthDomain.cs" />
     <Compile Include="Models\Domain\EmailDomain.cs" />
+    <Compile Include="Models\Domain\Log.cs" />
+    <Compile Include="Models\Domain\Month.cs" />
     <Compile Include="Models\Domain\Reports\MonthlySpendingByCategoryDomain.cs" />
     <Compile Include="Models\Requests\CategoryUpdateRequest.cs" />
     <Compile Include="Models\Requests\NewUserLogInsertRequest.cs" />
@@ -221,6 +238,7 @@
     <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\ReportService.cs" />
     <Compile Include="Services\TokenService.cs" />
+    <Compile Include="Services\TransactionService.cs" />
     <Compile Include="Services\UserAccountService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />
@@ -868,6 +886,8 @@
     <Content Include="Views\Home\InvalidEmail.cshtml" />
     <Content Include="Views\Home\EmailSent.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Goal\NewUser.cshtml" />
+    <Content Include="Views\Goal\NewYear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

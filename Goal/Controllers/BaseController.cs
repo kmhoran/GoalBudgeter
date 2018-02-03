@@ -88,7 +88,7 @@ namespace Goal.Controllers
                 string userId = UserService.GetCurrentUserId();
 
                 model.IsLoggedIn = true;
-                model.LogStatus = LogService.GetLogStatus(userId);
+                model.LogStatus = LogService.Data.GetLogStatus(userId);
             }
             else
             {

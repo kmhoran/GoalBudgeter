@@ -4,9 +4,9 @@
     angular.module(APPNAME)
     .controller("newUserController", NewUserController);
 
-    NewUserController.$inject = ['$scope', '$rootScope', '$uibModal', '$logHttpService'];
+    NewUserController.$inject = ['$scope', '$rootScope', '$timeout', '$uibModal', '$logHttpService'];
 
-    function NewUserController($scope, $rootScope, $uibModal, $logHttpService) {
+    function NewUserController($scope, $rootScope, $timeout, $uibModal, $logHttpService) {
         // Injection
         var vm = this;
         vm.$scope = $scope;
@@ -16,7 +16,8 @@
 
 
         // Startup Functions
-        _openNewUserModal();
+        $timeout(_openNewUserModal(), 3000);
+        
 
         // /////////////////////////////////////////////////////////////////////////////////////////
 

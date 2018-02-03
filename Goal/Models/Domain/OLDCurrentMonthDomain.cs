@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Goal.Models.Domain
 {
-    public class CurrentMonthDomain
+    public class OLDCurrentMonthDomain
     {
         public int YearId { get; set; }
         public DateTime YearStart { get; set; }

@@ -10,7 +10,7 @@ namespace Goal.Models.Requests
     public class TransactionInsertRequest
     {
         [Required]
-        public decimal Amount { get; set; }
+        public double Amount { get; set; }
 
         [Required]
         public int CategoryId { get; set; }
